@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Filter } from 'lucide-react';
+import { ChevronDown, Filter } from 'lucide-react-native';
 import { Button } from './ui/button';
 import { useLanguage } from './LanguageProvider';
 
@@ -36,7 +36,7 @@ export function CategoryDropdown({ categories, selectedCategory, onCategorySelec
         className="w-full h-12 justify-between touch-manipulation bg-white border-gray-300 hover:bg-gray-50"
       >
         <div className="flex items-center gap-2">
-          <Filter size={16} className="text-gray-500" />
+          <Filter size={16} />
           <span className="text-gray-700">
             {selectedCategoryData 
               ? `${selectedCategoryData.icon} ${t(`categories.${selectedCategoryData.id}`)}`
@@ -46,7 +46,6 @@ export function CategoryDropdown({ categories, selectedCategory, onCategorySelec
         </div>
         <ChevronDown 
           size={16} 
-          className={`text-gray-500 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
         />
       </Button>
 
@@ -69,7 +68,7 @@ export function CategoryDropdown({ categories, selectedCategory, onCategorySelec
             >
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                  <Filter size={16} className="text-gray-600" />
+                  <Filter size={16} />
                 </div>
                 <span>{t('categories.all')}</span>
               </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User } from 'lucide-react';
+import { User } from 'lucide-react-native';
 
 interface AvatarProps {
   src: string;
@@ -45,7 +45,7 @@ export function Avatar({ src, alt, size = 'md', className = '', fallbackSrc }: A
   if (showIcon) {
     return (
       <div className={`${sizeClasses[size]} ${className} rounded-full bg-gray-200 flex items-center justify-center`}>
-        <User size={size === 'sm' ? 12 : size === 'md' ? 16 : size === 'lg' ? 20 : 24} className="text-gray-500" />
+        <User size={size === 'sm' ? 12 : size === 'md' ? 16 : size === 'lg' ? 20 : 24} />
       </div>
     );
   }

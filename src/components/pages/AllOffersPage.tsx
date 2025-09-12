@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, MapPin, Star, ShoppingBag, Filter, Search, Utensils, Coffee, Pizza, Sandwich } from 'lucide-react';
+import { ArrowLeft, Clock, MapPin, Star, ShoppingBag, Filter, Search, Utensils, Coffee, Pizza, Sandwich } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Badge } from '../ui/badge';
@@ -181,7 +181,7 @@ export function AllOffersPage({ onBackToProfile }: AllOffersPageProps) {
         {/* Search */}
         <div className="px-4 pb-4">
           <div className="relative">
-            <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Search size={20} />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -240,7 +240,7 @@ export function AllOffersPage({ onBackToProfile }: AllOffersPageProps) {
                     <p className="text-sm text-gray-600 truncate">{offer.restaurantName}</p>
                   </div>
                   <Badge className={`ml-2 text-xs ${getUrgencyColor(offer.expiresAt)}`}>
-                    <Clock size={12} className="mr-1" />
+                    <Clock size={12} />
                     {getTimeLeft(offer.expiresAt)}
                   </Badge>
                 </div>
@@ -264,7 +264,7 @@ export function AllOffersPage({ onBackToProfile }: AllOffersPageProps) {
                 <div className="flex items-center justify-between mt-3 text-xs text-gray-500">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1">
-                      <Star size={12} className="text-yellow-500 fill-current" />
+                      <Star size={12} />
                       <span>{offer.rating}</span>
                     </div>
                     <div className="flex items-center gap-1">
@@ -294,7 +294,7 @@ export function AllOffersPage({ onBackToProfile }: AllOffersPageProps) {
             {/* Action Button */}
             <div className="mt-4">
               <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white">
-                <ShoppingBag size={16} className="mr-2" />
+                <ShoppingBag size={16} />
                 {t('offers.orderNow')}
               </Button>
             </div>
@@ -304,7 +304,7 @@ export function AllOffersPage({ onBackToProfile }: AllOffersPageProps) {
         {filteredOffers.length === 0 && (
           <div className="text-center py-12">
             <div className="text-gray-400 mb-2">
-              <ShoppingBag size={48} className="mx-auto" />
+              <ShoppingBag size={48} />
             </div>
             <h3 className="font-medium text-gray-600 mb-2">{t('offers.noOffersFound')}</h3>
             <p className="text-sm text-gray-500">{t('offers.tryDifferentSearch')}</p>

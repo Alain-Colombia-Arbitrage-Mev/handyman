@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Menu, Search, Bell } from 'lucide-react';
+import { ArrowLeft, Menu, Search, Bell } from 'lucide-react-native';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ParkiingLogo } from './ParkiingLogo';

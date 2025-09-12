@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MessageCircle, MapPin, Clock, Send } from 'lucide-react';
+import { Phone, Mail, MessageCircle, MapPin, Clock, Send } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -24,7 +24,7 @@ export function ContactPage({ onBackToProfile }: ContactPageProps) {
           <div className="space-y-4">
             <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <Phone size={20} className="text-green-600" />
+                <Phone size={20} />
               </div>
               <div>
                 <p className="font-medium">{t('contact.info.phone')}</p>
@@ -34,7 +34,7 @@ export function ContactPage({ onBackToProfile }: ContactPageProps) {
 
             <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Mail size={20} className="text-blue-600" />
+                <Mail size={20} />
               </div>
               <div>
                 <p className="font-medium">{t('contact.info.email')}</p>
@@ -44,7 +44,7 @@ export function ContactPage({ onBackToProfile }: ContactPageProps) {
 
             <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
               <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                <MessageCircle size={20} className="text-purple-600" />
+                <MessageCircle size={20} />
               </div>
               <div>
                 <p className="font-medium">{t('contact.info.liveChat')}</p>
@@ -54,7 +54,7 @@ export function ContactPage({ onBackToProfile }: ContactPageProps) {
 
             <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
               <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                <MapPin size={20} className="text-orange-600" />
+                <MapPin size={20} />
               </div>
               <div>
                 <p className="font-medium">{t('contact.info.offices')}</p>
@@ -67,7 +67,7 @@ export function ContactPage({ onBackToProfile }: ContactPageProps) {
         {/* Office Hours */}
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Clock size={20} className="text-gray-600" />
+            <Clock size={20} />
             <h3 className="font-semibold">{t('contact.hours.title')}</h3>
           </div>
           <div className="space-y-2 text-sm">
@@ -131,7 +131,7 @@ export function ContactPage({ onBackToProfile }: ContactPageProps) {
             </div>
 
             <Button className="w-full h-12 touch-manipulation">
-              <Send size={16} className="mr-2" />
+              <Send size={16} />
               {t('contact.form.sendMessage')}
             </Button>
 
@@ -148,7 +148,7 @@ export function ContactPage({ onBackToProfile }: ContactPageProps) {
             {t('contact.emergency.description')}
           </p>
           <Button className="bg-red-600 hover:bg-red-700 text-white touch-manipulation">
-            <Phone size={16} className="mr-2" />
+            <Phone size={16} />
             {t('contact.emergency.callEmergency')}
           </Button>
         </div>

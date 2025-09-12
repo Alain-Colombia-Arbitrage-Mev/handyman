@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Bell, Settings, HelpCircle, Briefcase, MessageSquare, CreditCard, Star, Edit3, ToggleLeft, ToggleRight, ShoppingBag, Clock } from 'lucide-react';
+import { User, Bell, Settings, HelpCircle, Briefcase, MessageSquare, CreditCard, Star, Edit3, ToggleLeft, ToggleRight, ShoppingBag, Clock } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Card } from '../ui/card';
@@ -56,7 +56,7 @@ export function ProfileTab({
         <Card className="p-6">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
-              <User size={32} className="text-blue-600" />
+              <User size={32} />
             </div>
             <div className="flex-1">
               <h2 className="font-semibold">Juan Pérez</h2>
@@ -72,7 +72,7 @@ export function ProfileTab({
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Edit3 size={16} className="text-blue-600" />
+                <Edit3 size={16} />
               </div>
               <div>
                 <p className="font-medium text-sm">{t('profile.userMode')}</p>
@@ -88,9 +88,9 @@ export function ProfileTab({
               className="p-2"
             >
               {userType === 'client' ? (
-                <ToggleLeft size={24} className="text-gray-400" />
+                <ToggleLeft size={24} />
               ) : (
-                <ToggleRight size={24} className="text-blue-600" />
+                <ToggleRight size={24} />
               )}
             </Button>
           </div>
@@ -107,7 +107,7 @@ export function ProfileTab({
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center gap-1">
-                  <Star size={16} className="text-yellow-500 fill-current" />
+                  <Star size={16} />
                   <p className="text-2xl font-bold text-yellow-600">{profileStats.rating}</p>
                 </div>
                 <p className="text-sm text-gray-500">{t('profile.rating')}</p>
@@ -127,14 +127,14 @@ export function ProfileTab({
                 className="w-full flex items-center gap-3 text-left touch-manipulation"
               >
                 <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
-                  <ShoppingBag size={20} className="text-white" />
+                  <ShoppingBag size={20} />
                 </div>
                 <div className="flex-1">
                   <p className="font-medium text-green-700">{t('profile.dailyOffers')}</p>
                   <p className="text-sm text-gray-500">{t('profile.dailyOffersDesc')}</p>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Clock size={16} className="text-orange-500" />
+                  <Clock size={16} />
                   <Badge variant="secondary" className="text-xs bg-orange-100 text-orange-700">
                     {t('profile.limitedTime')}
                   </Badge>
@@ -148,7 +148,7 @@ export function ProfileTab({
                 className="w-full flex items-center gap-3 text-left touch-manipulation"
               >
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <Briefcase size={20} className="text-blue-600" />
+                  <Briefcase size={20} />
                 </div>
                 <div className="flex-1">
                   <p className="font-medium">{t('profile.myJobs')}</p>
@@ -160,7 +160,7 @@ export function ProfileTab({
             <Card className="p-4">
               <button className="w-full flex items-center gap-3 text-left touch-manipulation">
                 <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                  <MessageSquare size={20} className="text-green-600" />
+                  <MessageSquare size={20} />
                 </div>
                 <div className="flex-1">
                   <p className="font-medium">{t('profile.messages')}</p>
@@ -176,7 +176,7 @@ export function ProfileTab({
                 className="w-full flex items-center gap-3 text-left touch-manipulation"
               >
                 <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <CreditCard size={20} className="text-purple-600" />
+                  <CreditCard size={20} />
                 </div>
                 <div className="flex-1">
                   <p className="font-medium">{t('profile.payments')}</p>
@@ -191,7 +191,7 @@ export function ProfileTab({
                 className="w-full flex items-center gap-3 text-left touch-manipulation"
               >
                 <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
-                  <Star size={20} className="text-yellow-600" />
+                  <Star size={20} />
                 </div>
                 <div className="flex-1">
                   <p className="font-medium">{t('profile.reviews')}</p>
@@ -210,7 +210,7 @@ export function ProfileTab({
               onClick={() => onNavigateToPage('settings')}
               className="w-full flex items-center gap-3 p-4 text-left hover:bg-gray-50 touch-manipulation"
             >
-              <Settings size={20} className="text-gray-600" />
+              <Settings size={20} />
               <span className="flex-1">{t('profile.settings')}</span>
             </button>
             
@@ -218,7 +218,7 @@ export function ProfileTab({
               onClick={() => onNavigateToPage('help')}
               className="w-full flex items-center gap-3 p-4 text-left hover:bg-gray-50 touch-manipulation"
             >
-              <HelpCircle size={20} className="text-gray-600" />
+              <HelpCircle size={20} />
               <span className="flex-1">{t('profile.helpSupport')}</span>
             </button>
           </Card>
@@ -229,7 +229,7 @@ export function ProfileTab({
           <Card className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <Edit3 size={24} className="text-blue-600" />
+                <Edit3 size={24} />
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold text-blue-800 mb-1">{t('profile.createProfessionalProfile')}</h3>

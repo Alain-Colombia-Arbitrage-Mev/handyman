@@ -1,6 +1,6 @@
 import React from 'react';
-import { X, User, Bell, Settings, HelpCircle, FileText, Shield, MessageCircle, LogOut, Edit3, Zap, Plus, Briefcase, ShoppingBag, Clock, Wrench } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { X, User, Bell, Settings, HelpCircle, FileText, Shield, MessageCircle, LogOut, Edit3, Zap, Plus, Briefcase, ShoppingBag, Clock, Wrench } from 'lucide-react-native';
+import { MotiView } from 'moti';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { VerifiedIcon } from './VerifiedIcon';
@@ -66,7 +66,7 @@ export function HamburgerMenu({ isOpen, onClose, onNavigate, unreadCount }: Hamb
                 <div className="p-3 rounded-xl bg-gradient-to-r from-[#21ABF6] to-blue-600">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm border border-white/10">
-                      <User size={20} className="text-white" />
+                      <User size={20} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
@@ -148,28 +148,28 @@ export function HamburgerMenu({ isOpen, onClose, onNavigate, unreadCount }: Hamb
               <div className="flex-1 overflow-y-auto px-4 py-2">
                 <nav className="space-y-1">
                   <MenuItem
-                    icon={<User size={16} className="text-blue-600" />}
+                    icon={<User size={16} />}
                     label={t('menu.myProfile')}
                     onClick={() => handleNavigation('profile')}
                     bgColor="bg-blue-100"
                   />
 
                   <MenuItem
-                    icon={<Briefcase size={16} className="text-green-600" />}
+                    icon={<Briefcase size={16} />}
                     label={t('menu.myJobs')}
                     onClick={() => handleNavigation('my-jobs')}
                     bgColor="bg-green-100"
                   />
 
                   <MenuItem
-                    icon={<Clock size={16} className="text-orange-600" />}
+                    icon={<Clock size={16} />}
                     label={t('menu.dailyOffers')}
                     onClick={() => handleNavigation('all-offers')}
                     bgColor="bg-orange-100"
                   />
 
                   <MenuItem
-                    icon={<Bell size={16} className="text-orange-600" />}
+                    icon={<Bell size={16} />}
                     label={t('menu.notifications')}
                     onClick={() => handleNavigation('notifications')}
                     bgColor="bg-orange-100"
@@ -177,7 +177,7 @@ export function HamburgerMenu({ isOpen, onClose, onNavigate, unreadCount }: Hamb
                   />
 
                   <MenuItem
-                    icon={<Edit3 size={16} className="text-purple-600" />}
+                    icon={<Edit3 size={16} />}
                     label={t('menu.professionalProfile')}
                     onClick={() => handleNavigation('create-profile')}
                     bgColor="bg-purple-100"
@@ -187,21 +187,21 @@ export function HamburgerMenu({ isOpen, onClose, onNavigate, unreadCount }: Hamb
                   <div className="border-t border-gray-200 my-3" />
 
                   <MenuItem
-                    icon={<Settings size={16} className="text-gray-600" />}
+                    icon={<Settings size={16} />}
                     label={t('menu.settings')}
                     onClick={() => handleNavigation('settings')}
                     bgColor="bg-gray-100"
                   />
 
                   <MenuItem
-                    icon={<HelpCircle size={16} className="text-gray-600" />}
+                    icon={<HelpCircle size={16} />}
                     label={t('menu.helpSupport')}
                     onClick={() => handleNavigation('help')}
                     bgColor="bg-gray-100"
                   />
 
                   <MenuItem
-                    icon={<MessageCircle size={16} className="text-gray-600" />}
+                    icon={<MessageCircle size={16} />}
                     label={t('menu.contact')}
                     onClick={() => handleNavigation('contact')}
                     bgColor="bg-gray-100"
@@ -211,14 +211,14 @@ export function HamburgerMenu({ isOpen, onClose, onNavigate, unreadCount }: Hamb
                   <div className="border-t border-gray-200 my-3" />
 
                   <MenuItem
-                    icon={<FileText size={16} className="text-gray-600" />}
+                    icon={<FileText size={16} />}
                     label={t('menu.terms')}
                     onClick={() => handleNavigation('terms')}
                     bgColor="bg-gray-100"
                   />
 
                   <MenuItem
-                    icon={<Shield size={16} className="text-gray-600" />}
+                    icon={<Shield size={16} />}
                     label={t('menu.privacy')}
                     onClick={() => handleNavigation('privacy')}
                     bgColor="bg-gray-100"
@@ -230,7 +230,7 @@ export function HamburgerMenu({ isOpen, onClose, onNavigate, unreadCount }: Hamb
               <div className="p-4 border-t border-gray-200 bg-gray-50/50">
                 <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-red-50 active:bg-red-100 transition-all duration-200 text-red-600 touch-manipulation active:scale-[0.98]">
                   <div className="w-7 h-7 bg-red-100 rounded-lg flex items-center justify-center">
-                    <LogOut size={14} className="text-red-600" />
+                    <LogOut size={14} />
                   </div>
                   <span className="font-medium text-sm">{t('menu.logout')}</span>
                 </button>

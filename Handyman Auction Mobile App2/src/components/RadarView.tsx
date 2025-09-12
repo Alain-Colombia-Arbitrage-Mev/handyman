@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap } from './GoogleMap';
 import { Job, CommercialOffer, UserLocation } from '../types';
-import { Radar, MapPin, DollarSign, Clock, Filter, Zap, Store, Percent, Menu, Bell } from 'lucide-react';
+import { Radar, MapPin, DollarSign, Clock, Filter, Zap, Store, Percent, Menu, Bell, Target, FlashZap, Briefcase } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Switch } from './ui/switch';
@@ -9,21 +9,103 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { useLanguage } from './LanguageProvider';
 import { formatCurrency } from '../utils/helpers';
 
+// Nuevos tipos para los 3 tipos de ofertas
+interface Opportunity {
+  id: string;
+  businessId: string;
+  businessName: string;
+  businessLogo?: string;
+  title: string;
+  description: string;
+  originalPrice: number;
+  discountedPrice: number;
+  discount: number;
+  category: 'food' | 'retail' | 'services' | 'entertainment' | 'perishables';
+  location: string;
+  coordinates: { lat: number; lng: number };
+  availableUntil: Date;
+  quantity: number;
+  remainingQuantity: number;
+  images: string[];
+  distance?: number;
+  timeRemaining?: number;
+}
+
+interface FlashJob {
+  id: string;
+  clientId: string;
+  clientName: string;
+  title: string;
+  description: string;
+  category: string;
+  fixedPrice: number;
+  currency: string;
+  requiredSkills: string[];
+  urgency: 'high' | 'urgent';
+  estimatedDuration: string;
+  scheduledFor: Date;
+  deadline: Date;
+  location: string;
+  coordinates: { lat: number; lng: number };
+  images?: string[];
+  distance?: number;
+  timeToDeadline?: number;
+}
+
+interface JobOffer {
+  id: string;
+  clientId: string;
+  clientName: string;
+  title: string;
+  description: string;
+  category: string;
+  jobType: 'fixed_price' | 'bids_allowed';
+  budget: { min: number; max: number; currency: string };
+  fixedPrice?: number;
+  urgency: 'low' | 'medium' | 'high';
+  requiredSkills: string[];
+  estimatedDuration: string;
+  location: string;
+  coordinates: { lat: number; lng: number };
+  acceptsBids: boolean;
+  proposalsCount?: number;
+  distance?: number;
+}
+
 interface RadarViewProps {
-  jobs: Job[];
-  commercialOffers: CommercialOffer[];
+  // Nuevos tipos de ofertas
+  opportunities: Opportunity[];
+  flashJobs: FlashJob[];
+  jobOffers: JobOffer[];
+  // Tipos legacy para compatibilidad
+  jobs?: Job[];
+  commercialOffers?: CommercialOffer[];
   unreadCount?: number;
-  onJobClick: (job: Job) => void;
-  onOfferClick: (offer: CommercialOffer) => void;
+  userSkills: string[];
+  userCategories: string[];
+  onOpportunityClick: (opportunity: Opportunity) => void;
+  onFlashJobClick: (flashJob: FlashJob) => void;
+  onJobOfferClick: (jobOffer: JobOffer) => void;
+  // Legacy handlers
+  onJobClick?: (job: Job) => void;
+  onOfferClick?: (offer: CommercialOffer) => void;
   onAddNotification: (notification: any) => void;
   onShowHamburgerMenu?: () => void;
   onShowNotifications?: () => void;
 }
 
 export function RadarView({ 
-  jobs, 
-  commercialOffers, 
+  opportunities,
+  flashJobs,
+  jobOffers,
+  jobs = [], 
+  commercialOffers = [], 
   unreadCount = 0,
+  userSkills,
+  userCategories,
+  onOpportunityClick,
+  onFlashJobClick,
+  onJobOfferClick,
   onJobClick, 
   onOfferClick, 
   onAddNotification,

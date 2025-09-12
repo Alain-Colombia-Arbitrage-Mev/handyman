@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, Upload, MapPin, Clock, Info, DollarSign, Calendar, Zap } from 'lucide-react';
+import { Camera, Upload, MapPin, Clock, Info, DollarSign, Calendar, Zap } from 'lucide-react-native';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
@@ -38,7 +38,7 @@ export function PostJobTab({ onNavigateToQuickOpportunity, onAddNotification }: 
             className="w-full touch-manipulation"
             onClick={onNavigateToQuickOpportunity}
           >
-            <Zap size={16} className="mr-2" />
+            <Zap size={16} />
             {t('home.flashOffer')} ⚡
           </Button>
         </div>
@@ -48,10 +48,10 @@ export function PostJobTab({ onNavigateToQuickOpportunity, onAddNotification }: 
             <div>
               <label className="block font-medium mb-3">{t('postJob.projectPhotos')}</label>
               <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center w-full">
-                <Camera size={32} className="mx-auto text-gray-400 mb-2" />
+                <Camera size={32} />
                 <p className="text-sm text-gray-500 mb-2">{t('postJob.addPhotos')}</p>
                 <Button variant="outline" size="sm" className="touch-manipulation">
-                  <Upload size={16} className="mr-2" />
+                  <Upload size={16} />
                   {t('postJob.uploadPhotos')}
                 </Button>
               </div>
@@ -80,7 +80,7 @@ export function PostJobTab({ onNavigateToQuickOpportunity, onAddNotification }: 
             <div>
               <label className="block font-medium mb-2">{t('postJob.location')} *</label>
               <div className="relative w-full">
-                <MapPin size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <MapPin size={20} />
                 <Input placeholder={t('postJob.locationPlaceholder')} className="pl-10 h-12 w-full touch-manipulation" />
               </div>
             </div>
@@ -107,13 +107,13 @@ export function PostJobTab({ onNavigateToQuickOpportunity, onAddNotification }: 
               </div>
 
               <div className="relative w-full">
-                <Clock size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Clock size={20} />
                 <Input placeholder={t('postJob.scheduleExample')} className="pl-10 h-12 w-full touch-manipulation" />
               </div>
 
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 mt-3">
                 <div className="flex items-start gap-2">
-                  <Info size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <Info size={16} />
                   <div className="text-sm">
                     <p className="text-blue-800 font-medium mb-1">{t('postJob.suggestion')}</p>
                     <p className="text-blue-700">{t('postJob.flexibleTip')}</p>
@@ -144,13 +144,13 @@ export function PostJobTab({ onNavigateToQuickOpportunity, onAddNotification }: 
               </div>
 
               <div className="relative w-full">
-                <DollarSign size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <DollarSign size={20} />
                 <Input type="number" placeholder={t('postJob.budgetExample')} className="pl-10 h-12 w-full touch-manipulation" />
               </div>
 
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 mt-3">
                 <div className="flex items-start gap-2">
-                  <Info size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <Info size={16} />
                   <div className="text-sm">
                     <p className="text-blue-800 font-medium mb-1">{t('postJob.howItWorks')}</p>
                     <ul className="text-blue-700 space-y-1">
@@ -165,7 +165,7 @@ export function PostJobTab({ onNavigateToQuickOpportunity, onAddNotification }: 
             <div>
               <label className="block font-medium mb-2">{t('postJob.deadline')}</label>
               <div className="relative w-full">
-                <Calendar size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <Calendar size={20} />
                 <Input type="date" className="pl-10 h-12 w-full touch-manipulation" />
               </div>
             </div>

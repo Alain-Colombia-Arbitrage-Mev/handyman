@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MessageCircle, HelpCircle, FileText, Shield, ChevronRight } from 'lucide-react';
+import { Phone, Mail, MessageCircle, HelpCircle, FileText, Shield, ChevronRight } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { BackHeader } from '../Header';
 import { useLanguage } from '../LanguageProvider';
@@ -52,30 +52,30 @@ export function HelpPage({ onBackToProfile }: HelpPageProps) {
           <h3 className="font-semibold mb-4">{t('help.contact.title')}</h3>
           <div className="space-y-3">
             <button className="w-full flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors">
-              <Phone size={20} className="text-green-600" />
+              <Phone size={20} />
               <div className="flex-1 text-left">
                 <p className="font-medium">{t('help.contact.phone')}</p>
                 <p className="text-sm text-gray-500">+52 55 1234 5678</p>
               </div>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} />
             </button>
             
             <button className="w-full flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors">
-              <Mail size={20} className="text-blue-600" />
+              <Mail size={20} />
               <div className="flex-1 text-left">
                 <p className="font-medium">{t('help.contact.email')}</p>
                 <p className="text-sm text-gray-500">soporte@parkiing.com</p>
               </div>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} />
             </button>
             
             <button className="w-full flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors">
-              <MessageCircle size={20} className="text-purple-600" />
+              <MessageCircle size={20} />
               <div className="flex-1 text-left">
                 <p className="font-medium">{t('help.contact.liveChat')}</p>
                 <p className="text-sm text-gray-500">{t('help.contact.available247')}</p>
               </div>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} />
             </button>
           </div>
         </div>
@@ -83,7 +83,7 @@ export function HelpPage({ onBackToProfile }: HelpPageProps) {
         {/* FAQ */}
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <HelpCircle size={20} className="text-orange-600" />
+            <HelpCircle size={20} />
             <h3 className="font-semibold">{t('help.faq.title')}</h3>
           </div>
           <div className="space-y-3">
@@ -105,27 +105,27 @@ export function HelpPage({ onBackToProfile }: HelpPageProps) {
           <h3 className="font-semibold mb-4">{t('help.resources.title')}</h3>
           <div className="space-y-3">
             <button className="w-full flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors">
-              <FileText size={20} className="text-gray-600" />
+              <FileText size={20} />
               <div className="flex-1 text-left">
                 <p className="font-medium">{t('help.resources.termsAndConditions')}</p>
               </div>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} />
             </button>
             
             <button className="w-full flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors">
-              <Shield size={20} className="text-gray-600" />
+              <Shield size={20} />
               <div className="flex-1 text-left">
                 <p className="font-medium">{t('help.resources.privacyPolicy')}</p>
               </div>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} />
             </button>
             
             <button className="w-full flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors">
-              <HelpCircle size={20} className="text-gray-600" />
+              <HelpCircle size={20} />
               <div className="flex-1 text-left">
                 <p className="font-medium">{t('help.resources.userGuide')}</p>
               </div>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} />
             </button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Job } from '../../types';
 import { JobCard } from '../JobCard';
-import { Briefcase, Clock, CheckCircle } from 'lucide-react';
+import { Briefcase, Clock, CheckCircle } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { BackHeader } from '../Header';
@@ -48,7 +48,7 @@ export function MyJobsPage({ jobList, onJobClick, onBackToProfile, onSetActiveTa
           ))}
           {openJobs.length === 0 && (
             <div className="text-center py-12">
-              <Briefcase size={48} className="mx-auto text-gray-300 mb-4" />
+              <Briefcase size={48} />
               <h3 className="font-medium text-gray-600 mb-2">{t('myJobs.empty.noOpenJobs')}</h3>
               <p className="text-sm text-gray-500 mb-4">{t('myJobs.empty.publishToReceiveOffers')}</p>
               <Button 
@@ -67,7 +67,7 @@ export function MyJobsPage({ jobList, onJobClick, onBackToProfile, onSetActiveTa
           ))}
           {inProgressJobs.length === 0 && (
             <div className="text-center py-12">
-              <Clock size={48} className="mx-auto text-gray-300 mb-4" />
+              <Clock size={48} />
               <h3 className="font-medium text-gray-600 mb-2">{t('myJobs.empty.noProgressJobs')}</h3>
               <p className="text-sm text-gray-500">{t('myJobs.empty.acceptedJobsAppearHere')}</p>
             </div>
@@ -80,7 +80,7 @@ export function MyJobsPage({ jobList, onJobClick, onBackToProfile, onSetActiveTa
           ))}
           {completedJobs.length === 0 && (
             <div className="text-center py-12">
-              <CheckCircle size={48} className="mx-auto text-gray-300 mb-4" />
+              <CheckCircle size={48} />
               <h3 className="font-medium text-gray-600 mb-2">{t('myJobs.empty.noCompletedJobs')}</h3>
               <p className="text-sm text-gray-500">{t('myJobs.empty.finishedJobsAppearHere')}</p>
             </div>

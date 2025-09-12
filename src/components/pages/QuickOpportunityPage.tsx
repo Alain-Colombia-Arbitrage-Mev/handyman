@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Zap, Clock, MapPin, Star, ShoppingBag, Plus, Utensils, Coffee, Pizza, Sandwich } from 'lucide-react';
+import { ArrowLeft, Zap, Clock, MapPin, Star, ShoppingBag, Plus, Utensils, Coffee, Pizza, Sandwich } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -121,7 +121,7 @@ export function QuickOpportunityPage({ onBack, onPublish }: QuickOpportunityPage
                 onClick={() => setFormData({...formData, type: 'daily'})}
               >
                 <div className="flex items-center gap-3">
-                  <Clock size={20} className="text-green-600" />
+                  <Clock size={20} />
                   <div>
                     <h3 className="font-medium">{t('quickOpportunity.dailyOffer')}</h3>
                     <p className="text-sm text-gray-500">{t('quickOpportunity.dailyOfferDesc')}</p>
@@ -283,7 +283,7 @@ export function QuickOpportunityPage({ onBack, onPublish }: QuickOpportunityPage
                         <p className="text-xs text-gray-600 truncate">{offer.restaurantName}</p>
                       </div>
                       <Badge className={`ml-2 text-xs ${getUrgencyColor(offer.expiresAt)}`}>
-                        <Clock size={10} className="mr-1" />
+                        <Clock size={10} />
                         {getTimeLeft(offer.expiresAt)}
                       </Badge>
                     </div>
@@ -301,7 +301,7 @@ export function QuickOpportunityPage({ onBack, onPublish }: QuickOpportunityPage
                         </Badge>
                       </div>
                       <div className="flex items-center gap-2 text-gray-500">
-                        <Star size={10} className="text-yellow-500 fill-current" />
+                        <Star size={10} />
                         <span>{offer.rating}</span>
                         <MapPin size={10} />
                         <span>{offer.distance}km</span>
@@ -336,7 +336,7 @@ export function QuickOpportunityPage({ onBack, onPublish }: QuickOpportunityPage
               onClick={() => setShowForm(true)}
               className="w-full h-12 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white touch-manipulation"
             >
-              <Plus size={18} className="mr-2" />
+              <Plus size={18} />
               {t('quickOpportunity.publishNew')}
             </Button>
           </div>
@@ -344,7 +344,7 @@ export function QuickOpportunityPage({ onBack, onPublish }: QuickOpportunityPage
           {/* Info Card */}
           <Card className="p-4 bg-green-50 border-green-200">
             <div className="flex items-start gap-3">
-              <Clock size={20} className="text-green-600 mt-0.5" />
+              <Clock size={20} />
               <div className="flex-1">
                 <h4 className="font-medium text-green-800 mb-1">{t('offers.dailyOffers')}</h4>
                 <p className="text-sm text-green-700">

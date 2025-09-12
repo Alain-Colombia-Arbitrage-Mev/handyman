@@ -12,7 +12,14 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(eas build:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(ls:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx:*)",
+      "Bash(eas credentials:*)",
+      "Bash(xargs sed:*)",
+      "Bash(find:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [],
     "ask": []

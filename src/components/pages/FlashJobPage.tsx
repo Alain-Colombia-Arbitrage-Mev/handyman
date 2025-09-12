@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, MapPin, DollarSign, Clock, Zap, Info, Camera, Send, Calendar, Wrench } from 'lucide-react';
+import { ArrowLeft, MapPin, DollarSign, Clock, Zap, Info, Camera, Send, Calendar, Wrench } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -58,7 +58,7 @@ export function FlashJobPage({ onBack, onPublish }: FlashJobPageProps) {
           </Button>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <Wrench size={20} className="text-blue-500" />
+              <Wrench size={20} />
               <h1 className="font-semibold">{t('menu.quickJobs')}</h1>
             </div>
             <p className="text-sm text-gray-500">{t('menu.quickJobsDesc')}</p>
@@ -122,7 +122,7 @@ export function FlashJobPage({ onBack, onPublish }: FlashJobPageProps) {
                 {t('flashJob.where')} *
               </label>
               <div className="relative">
-                <MapPin size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <MapPin size={18} />
                 <Input
                   value={formData.location}
                   onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
@@ -138,7 +138,7 @@ export function FlashJobPage({ onBack, onPublish }: FlashJobPageProps) {
                 {t('flashJob.approximateBudget')} *
               </label>
               <div className="relative">
-                <DollarSign size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <DollarSign size={18} />
                 <Input
                   value={formData.budget}
                   onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
@@ -218,7 +218,7 @@ export function FlashJobPage({ onBack, onPublish }: FlashJobPageProps) {
           {/* Info Box */}
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mt-6">
             <div className="flex items-start gap-2">
-              <Wrench size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
+              <Wrench size={16} />
               <div className="text-sm">
                 <p className="text-blue-800 font-medium mb-1">{t('menu.quickJobs')}</p>
                 <ul className="text-blue-700 space-y-1">

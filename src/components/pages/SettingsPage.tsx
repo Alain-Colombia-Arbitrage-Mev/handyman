@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserSettings } from '../../types';
-import { Bell, Shield, Settings, Globe } from 'lucide-react';
+import { Bell, Shield, Settings, Globe } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Switch } from '../ui/switch';
 import { BackHeader } from '../Header';
@@ -23,7 +23,7 @@ export function SettingsPage({ settingsData, onBackToProfile, onUpdateSettings }
         {/* Notificaciones */}
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Bell size={20} className="text-blue-600" />
+            <Bell size={20} />
             <h3 className="font-semibold">{t('settings.notifications.title')}</h3>
           </div>
           <div className="space-y-4">
@@ -122,7 +122,7 @@ export function SettingsPage({ settingsData, onBackToProfile, onUpdateSettings }
         {/* Privacidad */}
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Shield size={20} className="text-green-600" />
+            <Shield size={20} />
             <h3 className="font-semibold">{t('settings.privacy.title')}</h3>
           </div>
           <div className="space-y-4">
@@ -172,7 +172,7 @@ export function SettingsPage({ settingsData, onBackToProfile, onUpdateSettings }
         {/* Preferencias */}
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
-            <Settings size={20} className="text-purple-600" />
+            <Settings size={20} />
             <h3 className="font-semibold">{t('settings.preferences.title')}</h3>
           </div>
           <div className="space-y-4">

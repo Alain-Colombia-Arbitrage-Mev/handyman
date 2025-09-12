@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap } from './GoogleMap';
 import { Job, CommercialOffer, UserLocation } from '../types';
-import { Radar, MapPin, DollarSign, Clock, Filter, Zap, Store, Percent, Menu, Bell } from 'lucide-react';
+import { Radar, MapPin, DollarSign, Clock, Filter, Zap, Store, Percent, Menu, Bell } from 'lucide-react-native';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Switch } from './ui/switch';
@@ -119,7 +119,7 @@ export function RadarView({
                 <Menu size={20} />
               </Button>
               <div className="flex items-center gap-2">
-                <Radar size={24} className="text-blue-600" />
+                <Radar size={24} />
                 <h1 className="text-xl font-semibold">{t('radar.title')}</h1>
               </div>
             </div>
@@ -243,7 +243,7 @@ export function RadarView({
                     <p className="font-semibold text-green-600">{formatCurrency(job.budget)}</p>
                     {job.isUrgent && (
                       <Badge className="bg-red-100 text-red-800 text-xs">
-                        <Zap size={10} className="mr-1" />
+                        <Zap size={10} />
                         {t('postJob.urgent')}
                       </Badge>
                     )}
@@ -262,7 +262,7 @@ export function RadarView({
 
             {nearbyJobs.length === 0 && (
               <div className="text-center py-8">
-                <Radar size={48} className="mx-auto text-gray-300 mb-3" />
+                <Radar size={48} />
                 <h3 className="font-medium text-gray-600 mb-2">{t('radar.noNearbyJobs')}</h3>
                 <p className="text-sm text-gray-500">
                   {t('radar.activateRadarDesc')}
@@ -280,7 +280,7 @@ export function RadarView({
               >
                 <div className="flex items-start gap-3">
                   <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                    <Store size={20} className="text-orange-600" />
+                    <Store size={20} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-1">
@@ -310,7 +310,7 @@ export function RadarView({
 
             {nearbyOffers.length === 0 && (
               <div className="text-center py-8">
-                <Store size={48} className="mx-auto text-gray-300 mb-3" />
+                <Store size={48} />
                 <h3 className="font-medium text-gray-600 mb-2">{t('radar.noNearbyOffers')}</h3>
                 <p className="text-sm text-gray-500">
                   {t('radar.commercialOffersDesc')}

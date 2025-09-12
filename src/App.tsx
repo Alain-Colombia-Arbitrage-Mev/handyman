@@ -115,7 +115,7 @@ function AppContent() {
             id: Date.now().toString(),
             title: t('notifications.jobPublished'),
             message: t('notifications.jobPublishedDesc'),
-            type: 'success',
+            type: 'system',
             timestamp: new Date(),
             isRead: false
           });

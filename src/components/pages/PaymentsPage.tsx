@@ -1,6 +1,6 @@
 import React from 'react';
 import { Payment } from '../../types';
-import { CheckCircle, Clock, XCircle, Download, CreditCard } from 'lucide-react';
+import { CheckCircle, Clock, XCircle, Download, CreditCard } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { BackHeader } from '../Header';
@@ -17,10 +17,10 @@ export function PaymentsPage({ payments, onBackToProfile, formatCurrency }: Paym
   
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'completed': return <CheckCircle size={16} className="text-green-600" />;
-      case 'pending': return <Clock size={16} className="text-yellow-600" />;
-      case 'failed': return <XCircle size={16} className="text-red-600" />;
-      default: return <Clock size={16} className="text-gray-600" />;
+      case 'completed': return <CheckCircle size={16} />;
+      case 'pending': return <Clock size={16} />;
+      case 'failed': return <XCircle size={16} />;
+      default: return <Clock size={16} />;
     }
   };
 
@@ -57,7 +57,7 @@ export function PaymentsPage({ payments, onBackToProfile, formatCurrency }: Paym
           </div>
           <div className="space-y-3">
             <div className="flex items-center gap-3 p-3 border rounded-lg">
-              <CreditCard size={20} className="text-blue-600" />
+              <CreditCard size={20} />
               <div className="flex-1">
                 <p className="font-medium">{t('payments.methods.creditCard')}</p>
                 <p className="text-sm text-gray-500">**** **** **** 1234</p>
@@ -65,7 +65,7 @@ export function PaymentsPage({ payments, onBackToProfile, formatCurrency }: Paym
               <Badge variant="secondary">{t('payments.methods.primary')}</Badge>
             </div>
             <div className="flex items-center gap-3 p-3 border rounded-lg">
-              <CreditCard size={20} className="text-green-600" />
+              <CreditCard size={20} />
               <div className="flex-1">
                 <p className="font-medium">PayPal</p>
                 <p className="text-sm text-gray-500">juan@email.com</p>

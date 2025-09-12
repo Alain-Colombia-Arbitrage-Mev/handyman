@@ -1,6 +1,6 @@
 import React from 'react';
 import { Review } from '../../types';
-import { Star, MessageCircle } from 'lucide-react';
+import { Star, MessageCircle } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { BackHeader } from '../Header';
 import { useLanguage } from '../LanguageProvider';
@@ -68,7 +68,7 @@ export function ReviewsPage({ reviews, onBackToProfile }: ReviewsPageProps) {
               {review.response && (
                 <div className="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-500">
                   <div className="flex items-center gap-2 mb-1">
-                    <MessageCircle size={14} className="text-blue-600" />
+                    <MessageCircle size={14} />
                     <span className="text-sm font-medium text-blue-600">Respuesta del profesional</span>
                     <span className="text-xs text-gray-500 ml-auto">
                       {review.response.date.toLocaleDateString('es-MX')}
@@ -83,7 +83,7 @@ export function ReviewsPage({ reviews, onBackToProfile }: ReviewsPageProps) {
 
         {reviews.length === 0 && (
           <div className="text-center py-12">
-            <Star size={48} className="mx-auto text-gray-300 mb-4" />
+            <Star size={48} />
             <h3 className="font-medium text-gray-600 mb-2">
               No tienes reseñas aún
             </h3>

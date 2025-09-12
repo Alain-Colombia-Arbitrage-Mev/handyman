@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Search, Zap, MapPin, DollarSign, Clock, User, Filter } from 'lucide-react';
+import { ArrowLeft, Search, Zap, MapPin, DollarSign, Clock, User, Filter } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Badge } from '../ui/badge';
@@ -48,7 +48,7 @@ export function FlashOffersPage({ onBack, jobs, onJobClick }: FlashOffersPagePro
           </Button>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <Zap size={20} className="text-yellow-500" />
+              <Zap size={20} />
               <h1 className="font-semibold">{t('menu.flashOffer')}</h1>
             </div>
             <p className="text-sm text-gray-500">{t('menu.flashOfferDesc')}</p>
@@ -57,7 +57,7 @@ export function FlashOffersPage({ onBack, jobs, onJobClick }: FlashOffersPagePro
 
         {/* Search Bar */}
         <div className="relative mb-3">
-          <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Search size={18} />
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -117,7 +117,7 @@ export function FlashOffersPage({ onBack, jobs, onJobClick }: FlashOffersPagePro
         ) : (
           <div className="text-center py-12 w-full">
             <div className="text-gray-400 mb-4">
-              <Zap size={48} className="mx-auto" />
+              <Zap size={48} />
             </div>
             <h3 className="font-medium text-gray-600 mb-2">
               {searchQuery ? 'No se encontraron trabajos' : 'No hay trabajos flash activos'}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Camera, Upload, Plus, X, MapPin, Clock, Award, Languages, Truck, Shield, User, MessageCircle, DollarSign, Star, CheckCircle, Info } from 'lucide-react';
+import { ArrowLeft, Camera, Upload, Plus, X, MapPin, Clock, Award, Languages, Truck, Shield, User, MessageCircle, DollarSign, Star, CheckCircle, Info } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -209,7 +209,7 @@ export function ProfileCreationPage({ onBack, onSave, initialData }: ProfileCrea
             {profileData.avatar ? (
               <img src={profileData.avatar} alt="Avatar" className="w-full h-full object-cover" />
             ) : (
-              <User size={32} className="text-gray-400" />
+              <User size={32} />
             )}
           </div>
           <Button
@@ -388,7 +388,7 @@ export function ProfileCreationPage({ onBack, onSave, initialData }: ProfileCrea
 
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
         <div className="flex items-start gap-2">
-          <Info size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
+          <Info size={16} />
           <div className="text-sm">
             <p className="text-blue-800 font-medium mb-1">{t('profileCreation.pricingTips')}</p>
             <ul className="text-blue-700 space-y-1">

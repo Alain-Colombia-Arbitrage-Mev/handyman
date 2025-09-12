@@ -20,7 +20,7 @@ import {
   Gift,
   Trophy,
   Check
-} from 'lucide-react';
+} from 'lucide-react-native';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { useLanguage } from './LanguageProvider';
@@ -49,40 +49,40 @@ export function NotificationCenter({
     
     switch (type) {
       case 'new_bid':
-        return <TrendingUp size={16} className="text-green-600" />;
+        return <TrendingUp size={16} />;
       
       case 'message':
-        return <MessageCircle size={16} className="text-blue-600" />;
+        return <MessageCircle size={16} />;
       
       case 'job_opportunity':
         if (urgency === 'high') {
-          return <AlertTriangle size={16} className="text-red-600" />;
+          return <AlertTriangle size={16} />;
         }
-        return <Target size={16} className="text-orange-600" />;
+        return <Target size={16} />;
       
       case 'business_offer':
-        return <Store size={16} className="text-purple-600" />;
+        return <Store size={16} />;
       
       case 'surplus_auction':
         if (urgency === 'high') {
-          return <Zap size={16} className="text-amber-600" />;
+          return <Zap size={16} />;
         }
-        return <Hammer size={16} className="text-indigo-600" />;
+        return <Hammer size={16} />;
       
       case 'internal_message':
-        return <Megaphone size={16} className="text-[#21ABF6]" />;
+        return <Megaphone size={16} />;
       
       case 'job_update':
-        return <Briefcase size={16} className="text-blue-500" />;
+        return <Briefcase size={16} />;
       
       case 'payment':
-        return <CheckCircle size={16} className="text-green-600" />;
+        return <CheckCircle size={16} />;
       
       case 'system':
-        return <Settings size={16} className="text-gray-600" />;
+        return <Settings size={16} />;
       
       default:
-        return <Bell size={16} className="text-gray-600" />;
+        return <Bell size={16} />;
     }
   };
 
@@ -132,7 +132,7 @@ export function NotificationCenter({
     if (notification.urgency === 'high') {
       return (
         <div className="flex items-center gap-1 mb-2">
-          <AlertTriangle size={12} className="text-red-500" />
+          <AlertTriangle size={12} />
           <Badge variant="destructive" className="text-xs px-2 py-0.5 h-5">
             {t('postJob.urgent').toUpperCase()}
           </Badge>
@@ -275,7 +275,7 @@ export function NotificationCenter({
                               }}
                               className="p-1 hover:bg-gray-100 rounded-full"
                             >
-                              <X size={14} className="text-gray-400" />
+                              <X size={14} />
                             </Button>
                           </div>
                         </div>
@@ -295,7 +295,7 @@ export function NotificationCenter({
                                 className="text-xs h-8 px-4 bg-red-600 hover:bg-red-700 text-white border-0 shadow-sm"
                                 onClick={(e) => handleAcceptOpportunity(notification, e)}
                               >
-                                <Check size={14} className="mr-1" />
+                                <Check size={14} />
                                 {t('notifications.acceptOpportunity')}
                               </Button>
                             </div>
@@ -377,7 +377,7 @@ export function NotificationCenter({
                               }}
                               className="p-1 hover:bg-gray-100 rounded-full"
                             >
-                              <X size={14} className="text-gray-400" />
+                              <X size={14} />
                             </Button>
                           </div>
                         </div>
@@ -397,7 +397,7 @@ export function NotificationCenter({
                                 className="text-xs h-7 px-3 bg-red-600 hover:bg-red-700 text-white border-0 shadow-sm opacity-75"
                                 onClick={(e) => handleAcceptOpportunity(notification, e)}
                               >
-                                <Check size={12} className="mr-1" />
+                                <Check size={12} />
                                 {t('notifications.acceptOpportunity')}
                               </Button>
                             </div>
@@ -429,7 +429,7 @@ export function NotificationCenter({
           {notifications.length === 0 && (
             <div className="text-center py-16">
               <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Bell size={32} className="text-gray-400" />
+                <Bell size={32} />
               </div>
               <h3 className="text-lg font-medium text-gray-600 mb-2">
                 {t('notifications.noNotifications')}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CommercialOffer } from '../types';
-import { ArrowLeft, MapPin, Clock, Percent, Store, Phone, Navigation, Share } from 'lucide-react';
+import { ArrowLeft, MapPin, Clock, Percent, Store, Phone, Navigation, Share } from 'lucide-react-native';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { useLanguage } from './LanguageProvider';
@@ -68,7 +68,7 @@ export function CommercialOfferDetails({ offer, onBack }: CommercialOfferDetails
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <div className="flex items-start gap-4 mb-4">
             <div className="w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-xl flex items-center justify-center">
-              <Store size={24} className="text-orange-600" />
+              <Store size={24} />
             </div>
             <div className="flex-1">
               <h2 className="text-xl font-semibold mb-1">{offer.businessName}</h2>
@@ -149,11 +149,11 @@ export function CommercialOfferDetails({ offer, onBack }: CommercialOfferDetails
         <div className="bg-white rounded-xl p-4 shadow-sm">
           <div className="grid grid-cols-2 gap-3 mb-4">
             <Button variant="outline" className="h-12">
-              <Phone size={16} className="mr-2" />
+              <Phone size={16} />
               {t('offers.call')}
             </Button>
             <Button variant="outline" className="h-12">
-              <Navigation size={16} className="mr-2" />
+              <Navigation size={16} />
               {t('offers.getDirections')}
             </Button>
           </div>
@@ -172,7 +172,7 @@ export function CommercialOfferDetails({ offer, onBack }: CommercialOfferDetails
           <h3 className="font-semibold mb-3">{t('offers.location')}</h3>
           <div className="h-32 bg-gray-100 rounded-lg flex items-center justify-center">
             <div className="text-center">
-              <MapPin size={24} className="mx-auto text-gray-400 mb-1" />
+              <MapPin size={24} />
               <p className="text-sm text-gray-500">{t('offers.locationMap')}</p>
             </div>
           </div>

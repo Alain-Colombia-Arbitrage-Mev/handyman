@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { GripVerticalIcon } from "lucide-react@0.487.0";
+import { GripVerticalIcon } from "lucide-react-native";
 import * as ResizablePrimitive from "react-resizable-panels@2.1.7";
 
 import { cn } from "./utils";

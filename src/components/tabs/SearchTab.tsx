@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Star, ChevronRight, MessageCircle, ArrowLeft, Award, TrendingUp } from 'lucide-react';
+import { Search, Star, ChevronRight, MessageCircle, ArrowLeft, Award, TrendingUp } from 'lucide-react-native';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -43,7 +43,7 @@ export function SearchTab({
         </div>
         
         <div className="relative mb-4 w-full">
-          <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Search size={20} />
           <Input 
             value={searchQuery} 
             onChange={(e) => onSearchChange(e.target.value)} 
@@ -129,12 +129,12 @@ export function SearchTab({
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-semibold truncate pr-2">{handyman.name}</h3>
-                  <ChevronRight size={16} className="text-gray-400 flex-shrink-0" />
+                  <ChevronRight size={16} />
                 </div>
                 
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <div className="flex items-center">
-                    <Star size={14} className="text-yellow-500 fill-current" />
+                    <Star size={14} />
                     <span className="ml-1 text-sm font-medium">{handyman.rating}</span>
                   </div>
                   <span className="text-sm text-gray-500">({handyman.reviewCount} {t('job.reviews')})</span>
@@ -164,7 +164,7 @@ export function SearchTab({
                   </span>
                   <div className="flex gap-2">
                     <Button size="sm" variant="outline" className="touch-manipulation">
-                      <MessageCircle size={14} className="mr-1" />
+                      <MessageCircle size={14} />
                       {t('job.message')}
                     </Button>
                     <Button size="sm" className="touch-manipulation">{t('job.viewProfile')}</Button>
@@ -178,7 +178,7 @@ export function SearchTab({
         {filteredHandymen.length === 0 && (
           <div className="text-center py-12 w-full">
             <div className="text-gray-400 mb-2">
-              <Search size={48} className="mx-auto" />
+              <Search size={48} />
             </div>
             <h3 className="font-medium text-gray-600 mb-2">{t('search.noProfessionalsFound')}</h3>
             <p className="text-sm text-gray-500">{t('search.tryChangingFilters')}</p>

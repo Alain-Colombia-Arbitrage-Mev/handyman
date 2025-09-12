@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Heart, Star, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Heart, Star, MessageCircle } from 'lucide-react-native';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { useLanguage } from './LanguageProvider';
@@ -40,7 +40,7 @@ export function HandymanProfileView({ handyman, onBack }: HandymanProfileViewPro
           <h2 className="text-xl font-semibold mb-2">{handyman.name}</h2>
           <div className="flex items-center justify-center gap-2 mb-3">
             <div className="flex items-center">
-              <Star size={16} className="text-yellow-500 fill-current" />
+              <Star size={16} />
               <span className="ml-1 font-semibold">{handyman.rating}</span>
             </div>
             <span className="text-gray-500">({handyman.reviewCount} {t('job.reviews')})</span>
@@ -56,7 +56,7 @@ export function HandymanProfileView({ handyman, onBack }: HandymanProfileViewPro
           </div>
           <div className="flex gap-3 w-full">
             <Button className="flex-1 h-12 touch-manipulation">
-              <MessageCircle size={16} className="mr-2" />
+              <MessageCircle size={16} />
               {t('job.message')}
             </Button>
             <Button variant="outline" className="flex-1 h-12 touch-manipulation">

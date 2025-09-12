@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { useLanguage } from '../LanguageProvider';
@@ -105,7 +105,7 @@ export function MessagesTab({ onSetActiveTab }: MessagesTabProps) {
         </div>
 
         <div className="text-center py-12 w-full">
-          <MessageCircle size={48} className="mx-auto text-gray-300 mb-4" />
+          <MessageCircle size={48} />
           <h3 className="font-medium text-gray-600 mb-2">{t('messages.noMessages')}</h3>
           <p className="text-sm text-gray-500 mb-4">{t('messages.startConversation')}</p>
           <Button onClick={() => onSetActiveTab('post')} className="touch-manipulation">{t('postJob.publishJob')}</Button>

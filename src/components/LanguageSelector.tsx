@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Languages, ChevronDown } from 'lucide-react';
+import { Languages, ChevronDown } from 'lucide-react-native';
 import { useLanguage } from './LanguageProvider';
 
 const languages = [
@@ -26,7 +26,7 @@ export function LanguageSelector() {
         className="w-full flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 active:bg-gray-150 transition-colors touch-manipulation"
       >
         <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-          <Languages size={16} className="text-gray-600" />
+          <Languages size={16} />
         </div>
         <div className="flex-1 text-left">
           <div className="flex items-center gap-2">
@@ -36,7 +36,6 @@ export function LanguageSelector() {
         </div>
         <ChevronDown 
           size={16} 
-          className={`text-gray-500 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 

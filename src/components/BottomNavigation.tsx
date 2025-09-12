@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Search, Radar, Plus, MessageCircle, User } from 'lucide-react';
+import { Home, Search, Radar, Plus, MessageCircle, User } from 'lucide-react-native';
 import { Badge } from './ui/badge';
 import { useLanguage } from './LanguageProvider';
 
@@ -59,7 +59,6 @@ export function BottomNavigation({ activeTab, onTabChange }: BottomNavigationPro
               <div className="relative">
                 <Icon 
                   size={20} 
-                  className={isActive ? 'fill-current' : ''} 
                 />
                 {tab.id === 'messages' && (
                   <Badge className="absolute -top-2 -right-2 h-4 w-4 flex items-center justify-center p-0 bg-red-500 text-white text-xs">

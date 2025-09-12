@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Job, CommercialOffer, UserLocation } from '../types';
-import { MapPin, DollarSign, Clock, Zap } from 'lucide-react';
+import { MapPin, DollarSign, Clock, Zap } from 'lucide-react-native';
 import { Badge } from './ui/badge';
 
 interface GoogleMapProps {

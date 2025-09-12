@@ -30,13 +30,13 @@ class ConvexSocketService {
       // Conectar Socket.io
       await socketService.connect(userId);
 
-      // Actualizar estado online en Convex
-      if (this.convexClient && this.userId) {
-        await this.convexClient.mutation("users:updateOnlineStatus", {
-          userId: this.userId,
-          isOnline: true,
-        });
-      }
+      // TODO: Actualizar estado online en Convex cuando implementemos la función
+      // if (this.convexClient && this.userId) {
+      //   await this.convexClient.mutation("users:updateOnlineStatus", {
+      //     userId: this.userId,
+      //     isOnline: true,
+      //   });
+      // }
 
       // Configurar listeners para sincronización
       this.setupSocketListeners();
@@ -54,13 +54,13 @@ class ConvexSocketService {
     socketService.onNewMessage(async (message) => {
       if (this.convexClient) {
         try {
-          // Guardar mensaje en Convex para persistencia
-          await this.convexClient.mutation("messages:sendMessage", {
-            conversationId: message.conversationId as Id<"conversations">,
-            senderId: message.senderId as Id<"users">,
-            content: message.content,
-            type: message.type,
-          });
+          // TODO: Guardar mensaje en Convex cuando implementemos messages
+          // await this.convexClient.mutation("messages:sendMessage", {
+          //   conversationId: message.conversationId as Id<"conversations">,
+          //   senderId: message.senderId as Id<"users">,
+          //   content: message.content,
+          //   type: message.type,
+          // });
         } catch (error) {
           console.error('Error saving message to Convex:', error);
         }
@@ -77,10 +77,11 @@ class ConvexSocketService {
     socketService.onUserStatusChange(async (data) => {
       if (this.convexClient) {
         try {
-          await this.convexClient.mutation("users:updateOnlineStatus", {
-            userId: data.userId as Id<"users">,
-            isOnline: data.isOnline,
-          });
+          // TODO: Actualizar estado de usuario cuando implementemos la función
+          // await this.convexClient.mutation("users:updateOnlineStatus", {
+          //   userId: data.userId as Id<"users">,
+          //   isOnline: data.isOnline,
+          // });
         } catch (error) {
           console.error('Error updating user status in Convex:', error);
         }
@@ -90,7 +91,7 @@ class ConvexSocketService {
 
   // Enviar mensaje con sincronización dual
   async sendMessage(messageData: {
-    conversationId: Id<"conversations">;
+    conversationId: string; // TODO: Cambiar a Id<"conversations"> cuando implementemos conversations
     senderId: Id<"users">;
     receiverId: Id<"users">;
     content: string;
@@ -106,15 +107,15 @@ class ConvexSocketService {
         conversationId: messageData.conversationId,
       });
 
-      // 2. Guardar en Convex para persistencia
-      if (this.convexClient) {
-        await this.convexClient.mutation("messages:sendMessage", {
-          conversationId: messageData.conversationId,
-          senderId: messageData.senderId,
-          content: messageData.content,
-          type: messageData.type,
-        });
-      }
+      // TODO: Guardar en Convex para persistencia cuando implementemos messages
+      // if (this.convexClient) {
+      //   await this.convexClient.mutation("messages:sendMessage", {
+      //     conversationId: messageData.conversationId,
+      //     senderId: messageData.senderId,
+      //     content: messageData.content,
+      //     type: messageData.type,
+      //   });
+      // }
 
       return true;
     } catch (error) {
@@ -139,7 +140,15 @@ class ConvexSocketService {
     try {
       // Crear trabajo en Convex
       if (this.convexClient) {
-        const jobId = await this.convexClient.mutation("jobs:createJob", jobData);
+        // Usar nuestra función simplificada de createJob
+        const jobId = await this.convexClient.mutation("jobs:createJob", {
+          title: jobData.title,
+          description: jobData.description,
+          category: jobData.category,
+          clientId: jobData.clientId,
+          location: jobData.location,
+          budget: jobData.budget,
+        });
 
         // Si es trabajo flash, notificar por Socket.io a profesionales cercanos
         if (jobData.isFlashJob) {
@@ -157,13 +166,13 @@ class ConvexSocketService {
 
   // Desconectar y actualizar estado
   async disconnect() {
-    // Actualizar estado offline en Convex
-    if (this.convexClient && this.userId) {
-      await this.convexClient.mutation("users:updateOnlineStatus", {
-        userId: this.userId,
-        isOnline: false,
-      });
-    }
+    // TODO: Actualizar estado offline en Convex cuando implementemos la función
+    // if (this.convexClient && this.userId) {
+    //   await this.convexClient.mutation("users:updateOnlineStatus", {
+    //     userId: this.userId,
+    //     isOnline: false,
+    //   });
+    // }
 
     // Desconectar Socket.io
     socketService.disconnect();

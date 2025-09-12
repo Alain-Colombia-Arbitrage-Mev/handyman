@@ -11,15 +11,14 @@ export const formatDistance = (distance: number) => {
   return distance < 1000 ? `${distance}m` : `${(distance/1000).toFixed(1)}km`;
 };
 
-export const renderStars = (rating: number) => {
-  return Array.from({ length: 5 }, (_, i) => (
-    <span
-      key={i}
-      className={i < rating ? 'text-yellow-400' : 'text-gray-300'}
-    >
-      ★
-    </span>
-  ));
+export const getStarsArray = (rating: number): string[] => {
+  return Array.from({ length: 5 }, (_, i) => 
+    i < rating ? '★' : '☆'
+  );
+};
+
+export const formatStars = (rating: number): string => {
+  return getStarsArray(rating).join('');
 };
 
 export const getTimeLeft = (deadline: Date) => {

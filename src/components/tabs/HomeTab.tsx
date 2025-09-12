@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, Menu, Zap, Wrench } from 'lucide-react';
+import { Search, Bell, Menu, Zap, Wrench } from 'lucide-react-native';
 import { ParkiingLogo } from '../ParkiingLogo';
 import { CategoryDropdown } from '../CategoryDropdown';
 import { JobCard } from '../JobCard';
@@ -99,7 +99,7 @@ export function HomeTab({
             onClick={onNavigateToFlashJob}
             className="w-full h-12 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white touch-manipulation shadow-sm hover:shadow-md transition-all duration-200"
           >
-            <Wrench size={18} className="mr-2" />
+            <Wrench size={18} />
             {t('menu.quickJobs')}
           </Button>
         </div>
@@ -158,7 +158,7 @@ export function HomeTab({
         {filteredJobs.length === 0 && (
           <div className="text-center py-12 w-full">
             <div className="text-gray-400 mb-2">
-              <Search size={48} className="mx-auto" />
+              <Search size={48} />
             </div>
             <h3 className="font-medium text-gray-600 mb-2">{t('home.noJobsFound')}</h3>
             <p className="text-sm text-gray-500">{t('home.tryChangingFilters')}</p>

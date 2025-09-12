@@ -1,6 +1,6 @@
 import React from 'react';
 import { Job } from '../types';
-import { MapPin, Calendar, DollarSign, Clock, Zap, User } from 'lucide-react';
+import { MapPin, Calendar, DollarSign, Clock, Zap, User } from 'lucide-react-native';
 import { Badge } from './ui/badge';
 import { formatCurrency, formatSchedule } from '../utils/helpers';
 import { useLanguage } from './LanguageProvider';
@@ -86,7 +86,7 @@ export function JobCard({ job, onClick }: JobCardProps) {
       {/* Job Details */}
       <div className="space-y-2 mb-4">
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <MapPin size={14} className="text-gray-400" />
+          <MapPin size={14} />
           <span>{job.location}</span>
           {job.distance && (
             <span className="text-blue-600">
@@ -100,17 +100,17 @@ export function JobCard({ job, onClick }: JobCardProps) {
         </div>
 
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Calendar size={14} className="text-gray-400" />
+          <Calendar size={14} />
           <span>{t('jobCard.deadline')} {job.deadline.toLocaleDateString()}</span>
         </div>
 
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Clock size={14} className="text-gray-400" />
+          <Clock size={14} />
           <span>{formatSchedule(job.schedule)}</span>
         </div>
 
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <User size={14} className="text-gray-400" />
+          <User size={14} />
           <span>{t('jobCard.postedBy')} {job.postedBy}</span>
           <span className="text-gray-400">• {timeAgo(job.postedDate)}</span>
         </div>
@@ -129,7 +129,7 @@ export function JobCard({ job, onClick }: JobCardProps) {
         
         <div className="text-right">
           <div className="flex items-center gap-1 mb-1">
-            <DollarSign size={16} className="text-green-600" />
+            <DollarSign size={16} />
             <span className="text-lg font-semibold text-green-600">
               {formatCurrency(job.budget)}
             </span>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Plus, MapPin, DollarSign, Clock, Image, FileText, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Plus, MapPin, DollarSign, Clock, Image, FileText, AlertCircle } from 'lucide-react-native';
 import { Button } from '../ui/button';
 import { Card } from '../ui/card';
 import { Input } from '../ui/input';
@@ -127,7 +127,7 @@ export function PostJobPage({
                 {t('postJob.location')}
               </label>
               <div className="relative">
-                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <MapPin size={20} />
                 <Input
                   value={formData.location}
                   onChange={(e) => handleInputChange('location', e.target.value)}
@@ -142,7 +142,7 @@ export function PostJobPage({
                 {t('postJob.budget')}
               </label>
               <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <DollarSign size={20} />
                 <Input
                   type="number"
                   value={formData.budget}
@@ -171,7 +171,7 @@ export function PostJobPage({
                         : 'border-gray-200 hover:bg-gray-50'
                     }`}
                   >
-                    <Clock size={16} className="mx-auto mb-1" />
+                    <Clock size={16} />
                     <span className="text-xs font-medium">
                       {t(`postJob.urgency.${level}`)}
                     </span>
@@ -190,12 +190,12 @@ export function PostJobPage({
                 {t('postJob.images')}
               </label>
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                <Image className="mx-auto mb-2 text-gray-400" size={32} />
+                <Image size={32} />
                 <p className="text-sm text-gray-500 mb-2">
                   {t('postJob.imagesHint')}
                 </p>
                 <Button variant="outline" size="sm">
-                  <Plus size={16} className="mr-2" />
+                  <Plus size={16} />
                   {t('postJob.addImages')}
                 </Button>
               </div>
@@ -234,7 +234,7 @@ export function PostJobPage({
 
             <Card className="p-4 border-blue-200 bg-blue-50">
               <div className="flex items-start gap-3">
-                <AlertCircle className="text-blue-600 flex-shrink-0 mt-0.5" size={16} />
+                <AlertCircle size={16} />
                 <div className="text-sm text-blue-800">
                   <p className="font-medium mb-1">{t('postJob.publishInfo')}</p>
                   <p>{t('postJob.publishDescription')}</p>

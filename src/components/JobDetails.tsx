@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Job, Bid } from '../types';
-import { ArrowLeft, MapPin, Clock, DollarSign, Star, MessageCircle, Calendar, AlertCircle, Users, CheckCircle2, User } from 'lucide-react';
+import { ArrowLeft, MapPin, Clock, DollarSign, Star, MessageCircle, Calendar, AlertCircle, Users, CheckCircle2, User } from 'lucide-react-native';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Textarea } from './ui/textarea';
@@ -117,19 +117,19 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
               {/* Key Info Grid */}
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <div className="flex items-center gap-2 text-sm">
-                  <MapPin size={16} className="text-gray-400 flex-shrink-0" />
+                  <MapPin size={16} />
                   <span className="truncate">{job.location}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <Clock size={16} className="text-gray-400 flex-shrink-0" />
+                  <Clock size={16} />
                   <span>{timeLeft > 0 ? t('jobDetails.daysLeft', { days: timeLeft }) : t('jobDetails.expired')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <User size={16} className="text-gray-400 flex-shrink-0" />
+                  <User size={16} />
                   <span className="truncate">{job.postedBy}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <Users size={16} className="text-gray-400 flex-shrink-0" />
+                  <Users size={16} />
                   <span>{t('jobDetails.offersCount', { count: job.bids.length })}</span>
                 </div>
               </div>
@@ -138,7 +138,7 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
               <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 border border-green-200">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <DollarSign size={18} className="text-green-600" />
+                    <DollarSign size={18} />
                     <span className="font-semibold text-green-800">
                       {formatCurrency(job.budget)}
                     </span>
@@ -148,7 +148,7 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
                   </Badge>
                 </div>
                 <div className="flex items-start gap-2">
-                  <AlertCircle size={14} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <AlertCircle size={14} />
                   <span className="text-sm text-blue-700">
                     {job.budgetType === 'fixed' 
                       ? t('jobDetails.fixedBudgetTip')
@@ -184,7 +184,7 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
                   <div>
                     <label className="block text-sm font-medium mb-2">{t('jobDetails.yourOffer')} *</label>
                     <div className="relative">
-                      <DollarSign size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <DollarSign size={18} />
                       <Input
                         type="number"
                         value={bidAmount}
@@ -279,7 +279,7 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
                           <div className="min-w-0">
                             <h4 className="font-medium truncate">{bid.handymanName}</h4>
                             <div className="flex items-center gap-1">
-                              <Star size={14} className="text-yellow-400 fill-current" />
+                              <Star size={14} />
                               <span className="text-sm text-gray-600">{bid.handymanRating}</span>
                             </div>
                           </div>
@@ -297,14 +297,14 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
                     <div className="bg-gray-50 rounded-lg p-3 mb-3">
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div className="flex items-center gap-2">
-                          <Calendar size={14} className="text-gray-400" />
+                          <Calendar size={14} />
                           <div>
                             <p className="text-gray-500 text-xs">{t('jobDetails.start')}</p>
                             <p className="font-medium">{bid.estimatedStartDate}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <CheckCircle2 size={14} className="text-gray-400" />
+                          <CheckCircle2 size={14} />
                           <div>
                             <p className="text-gray-500 text-xs">{t('jobDetails.delivery')}</p>
                             <p className="font-medium">{bid.estimatedEndDate}</p>
@@ -319,7 +319,7 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
                     {/* Action Buttons */}
                     <div className="flex gap-2">
                       <Button size="sm" variant="outline" className="flex-1">
-                        <MessageCircle size={14} className="mr-2" />
+                        <MessageCircle size={14} />
                         {t('job.message')}
                       </Button>
                       <Button size="sm" className="flex-1 bg-green-600 hover:bg-green-700">
@@ -331,7 +331,7 @@ export function JobDetails({ job, onBack, onSubmitBid }: JobDetailsProps) {
               </div>
             ) : (
               <div className="p-8 text-center">
-                <Users size={48} className="mx-auto text-gray-300 mb-3" />
+                <Users size={48} />
                 <h4 className="font-medium text-gray-600 mb-1">{t('jobDetails.noBids')}</h4>
                 <p className="text-sm text-gray-500">
                   {t('jobDetails.bidsWillAppear')}
