@@ -1,6 +1,15 @@
-# Handyman Auction Mobile App
+# Handyman - App de Búsqueda de Trabajo y Oportunidades
 
-Una aplicación móvil desarrollada con React Native y Expo para conectar profesionales con clientes que necesitan servicios de reparación y mantenimiento.
+Una aplicación móvil de hiperlocalización desarrollada con React Native y Expo que conecta profesionales con clientes para servicios de reparación, mantenimiento y oportunidades laborales en tiempo real.
+
+## 🌟 Características Principales
+
+- 🔍 **Búsqueda geolocalizada** de trabajos y oportunidades
+- 📢 **Publicación de ofertas** laborales y servicios
+- 🔔 **Notificaciones push en tiempo real** con Firebase
+- 🗺️ **Integración con Google Maps Places API**
+- ⚡ **Backend con Convex** para datos en tiempo real
+- 📍 **Sistema de hiperlocalización** preciso
 
 *Basado en el diseño original disponible en: https://www.figma.com/design/3dL9916F3ttFyJ5fju3sAO/Handyman-Auction-Mobile-App*
 
@@ -280,6 +289,30 @@ Este comando te permitirá:
 - ⚡ **Ejecutar builds inmediatamente** sin esperar triggers automáticos
 - 🔄 **Probar el workflow** antes de hacer commit al repositorio  
 - 🚀 **Crear builds de emergencia** cuando necesites una release rápida
+
+## 🚀 Integraciones Planificadas
+
+### Backend y Base de Datos
+- [ ] **Convex Backend** - Base de datos en tiempo real
+- [ ] **Firebase Authentication** - Autenticación de usuarios
+- [ ] **Firebase Cloud Messaging** - Notificaciones push
+
+### Geolocalización y Mapas  
+- [ ] **Google Maps Places API** - Búsqueda de lugares
+- [ ] **Google Maps SDK** - Visualización de mapas
+- [ ] **Geolocation API** - Ubicación del usuario
+- [ ] **Sistema de hiperlocalización** - Búsquedas por proximidad
+
+### Funcionalidades Avanzadas
+- [ ] **Chat en tiempo real** - Mensajería entre usuarios
+- [ ] **Sistema de pagos** - Stripe/PayPal integration
+- [ ] **Subida de imágenes** - CloudFlare R2/AWS S3
+- [ ] **Sistema de calificaciones** - Reviews y ratings
+- [ ] **Notificaciones push personalizadas**
+- [ ] **Modo oscuro**
+
+### Repositorio del Proyecto
+📁 **GitHub**: https://github.com/Alain-Colombia-Arbitrage-Mev/handyman.git
 
 ---
 

@@ -6,7 +6,12 @@
       "Bash(npx eas-cli:*)",
       "Bash(eas build:configure)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(eas build:*)"
     ],
     "deny": [],
     "ask": []
