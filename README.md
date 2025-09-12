@@ -293,7 +293,11 @@ Este comando te permitirá:
 ## 🚀 Integraciones Planificadas
 
 ### Backend y Base de Datos
-- [ ] **Convex Backend** - Base de datos en tiempo real
+- [x] **Convex Backend** - Base de datos en tiempo real configurado
+  - Proyecto: `terrific-starling-996`
+  - Team: `guard-colombia`  
+  - URL: https://terrific-starling-996.convex.cloud
+  - HTTP Actions: https://terrific-starling-996.convex.site
 - [ ] **Firebase Authentication** - Autenticación de usuarios
 - [ ] **Firebase Cloud Messaging** - Notificaciones push
 
@@ -304,12 +308,44 @@ Este comando te permitirá:
 - [ ] **Sistema de hiperlocalización** - Búsquedas por proximidad
 
 ### Funcionalidades Avanzadas
-- [ ] **Chat en tiempo real** - Socket.io para mensajería instantánea
+- [x] **Chat en tiempo real** - Socket.io + Convex para mensajería híbrida
 - [ ] **Subida de imágenes** - CloudFlare R2/AWS S3
-- [ ] **Sistema de calificaciones** - Reviews y ratings
+- [x] **Sistema de calificaciones** - Esquema de reviews en Convex
 - [ ] **Notificaciones push personalizadas**
 - [ ] **Modo oscuro**
-- [ ] **Sistema de matching** - Algoritmo de coincidencias trabajo-profesional
+- [x] **Sistema de matching** - Algoritmos de búsqueda hiperlocalizada
+
+## 🗄️ Esquema de Base de Datos (Convex)
+
+### Tablas Principales
+- **`users`** - Usuarios (clientes y profesionales)
+- **`handymanProfiles`** - Perfiles detallados de profesionales
+- **`jobs`** - Trabajos y oportunidades laborales
+- **`proposals`** - Ofertas de profesionales para trabajos
+- **`conversations`** - Conversaciones de chat
+- **`messages`** - Mensajes individuales
+- **`notifications`** - Notificaciones push
+- **`reviews`** - Reseñas y calificaciones
+- **`categories`** - Categorías de servicios
+
+### Funciones Convex Disponibles
+```typescript
+// Usuarios
+api.users.createUser()
+api.users.getUserById()
+api.users.updateOnlineStatus()
+
+// Trabajos
+api.jobs.createJob()
+api.jobs.getAvailableJobs()
+api.jobs.getFlashJobs()
+api.jobs.searchJobs()
+
+// Mensajes
+api.messages.sendMessage()
+api.messages.getMessages()
+api.messages.getUserConversations()
+```
 
 ### Repositorio del Proyecto
 📁 **GitHub**: https://github.com/Alain-Colombia-Arbitrage-Mev/handyman.git
