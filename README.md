@@ -37,7 +37,7 @@ Una aplicación móvil de hiperlocalización desarrollada con React Native y Exp
 
 Antes de comenzar, asegúrate de tener instalado:
 
-- [Node.js](https://nodejs.org/) (versión 18 o superior)
+- [Node.js](https://nodejs.org/) (versión 20 o superior - recomendado v22+)
 - [npm](https://www.npmjs.com/) o [yarn](https://yarnpkg.com/)
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
 
@@ -304,12 +304,12 @@ Este comando te permitirá:
 - [ ] **Sistema de hiperlocalización** - Búsquedas por proximidad
 
 ### Funcionalidades Avanzadas
-- [ ] **Chat en tiempo real** - Mensajería entre usuarios
-- [ ] **Sistema de pagos** - Stripe/PayPal integration
+- [ ] **Chat en tiempo real** - Socket.io para mensajería instantánea
 - [ ] **Subida de imágenes** - CloudFlare R2/AWS S3
 - [ ] **Sistema de calificaciones** - Reviews y ratings
 - [ ] **Notificaciones push personalizadas**
 - [ ] **Modo oscuro**
+- [ ] **Sistema de matching** - Algoritmo de coincidencias trabajo-profesional
 
 ### Repositorio del Proyecto
 📁 **GitHub**: https://github.com/Alain-Colombia-Arbitrage-Mev/handyman.git

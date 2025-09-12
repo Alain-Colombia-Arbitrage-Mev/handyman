@@ -28,7 +28,10 @@
     "react-hook-form": "^7.55.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "@expo/vector-icons": "^14.0.2"
+    "@expo/vector-icons": "^14.0.2",
+    "socket.io-client": "^4.8.0",
+    "react-native-flash-message": "^0.4.2",
+    "react-native-uuid": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

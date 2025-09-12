@@ -8,9 +8,12 @@ import {
   SafeAreaView,
   StatusBar,
   TextInput,
+  Modal,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../src/providers/LanguageProvider';
+import { ChatRoom } from '../../src/components/ChatRoom';
+import { useSocket } from '../../src/hooks/useSocket';
 
 const conversations = [
   {
@@ -68,6 +71,16 @@ const conversations = [
 export default function MessagesScreen() {
   const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedChat, setSelectedChat] = useState<{
+    id: string;
+    name: string;
+    conversationId: string;
+  } | null>(null);
+  
+  // ID del usuario actual - en producción vendría del contexto de autenticación
+  const currentUserId = 'user_123';
+  
+  const { isConnected, isUserOnline } = useSocket(currentUserId);
 
   const filteredConversations = conversations.filter(conv =>
     conv.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -80,7 +93,14 @@ export default function MessagesScreen() {
       
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Mensajes</Text>
+        <View style={styles.headerLeft}>
+          <Text style={styles.headerTitle}>Mensajes</Text>
+          <View style={[styles.connectionIndicator, isConnected && styles.connected]}>
+            <Text style={styles.connectionText}>
+              {isConnected ? '🟢 En línea' : '🔴 Desconectado'}
+            </Text>
+          </View>
+        </View>
         <TouchableOpacity style={styles.headerButton}>
           <Ionicons name="create-outline" size={24} color="#3b82f6" />
         </TouchableOpacity>
@@ -107,12 +127,20 @@ export default function MessagesScreen() {
       <ScrollView style={styles.conversationsList} showsVerticalScrollIndicator={false}>
         {filteredConversations.length > 0 ? (
           filteredConversations.map((conversation) => (
-            <TouchableOpacity key={conversation.id} style={styles.conversationItem}>
+            <TouchableOpacity 
+              key={conversation.id} 
+              style={styles.conversationItem}
+              onPress={() => setSelectedChat({
+                id: conversation.id,
+                name: conversation.name,
+                conversationId: `conv_${conversation.id}`,
+              })}
+            >
               <View style={styles.avatarContainer}>
                 <View style={styles.avatar}>
                   <Text style={styles.avatarText}>{conversation.avatar}</Text>
                 </View>
-                {conversation.online && <View style={styles.onlineIndicator} />}
+                {(conversation.online || isUserOnline(conversation.id)) && <View style={styles.onlineIndicator} />}
               </View>
               
               <View style={styles.conversationContent}>
@@ -170,6 +198,22 @@ export default function MessagesScreen() {
           <Text style={styles.quickActionText}>Solicitudes</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Modal de Chat */}
+      <Modal
+        visible={selectedChat !== null}
+        animationType="slide"
+        presentationStyle="fullScreen"
+      >
+        {selectedChat && (
+          <ChatRoom
+            conversationId={selectedChat.conversationId}
+            currentUserId={currentUserId}
+            recipientName={selectedChat.name}
+            onBack={() => setSelectedChat(null)}
+          />
+        )}
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -189,10 +233,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
   },
+  headerLeft: {
+    flex: 1,
+  },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#111827',
+  },
+  connectionIndicator: {
+    marginTop: 4,
+  },
+  connected: {
+    opacity: 1,
+  },
+  connectionText: {
+    fontSize: 12,
+    color: '#6b7280',
   },
   headerButton: {
     padding: 8,
