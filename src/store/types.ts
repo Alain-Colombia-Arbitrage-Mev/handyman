@@ -257,22 +257,43 @@ export interface UIActions {
 export interface AppStore extends
   AuthState,
   AuthActions,
-  { jobs: Job[]; proposals: JobProposal[]; favorites: string[] },
   JobsActions,
-  { notifications: Notification[]; unreadCount: number },
   NotificationsActions,
-  { conversations: Conversation[]; messages: Record<string, Message[]>; typingUsers: Record<string, string[]> },
   MessagesActions,
-  { currentLocation: GeolocationPosition | null; hasLocationPermission: boolean; locationLoading: boolean; locationError: string | null },
   LocationActions,
-  { settings: AppSettings },
   SettingsActions,
-  { ui: UIState },
-  UIActions,
-  { connectivity: ConnectivityState },
-  {
-    // Global actions
-    hydrate: () => Promise<void>;
-    clearAll: () => Promise<void>;
-    sync: () => Promise<void>;
-  } {}
+  UIActions {
+  // Jobs state
+  jobs: Job[];
+  proposals: JobProposal[];
+  favorites: string[];
+
+  // Notifications state
+  notifications: Notification[];
+  unreadCount: number;
+
+  // Messages state
+  conversations: Conversation[];
+  messages: Record<string, Message[]>;
+  typingUsers: Record<string, string[]>;
+
+  // Location state
+  currentLocation: GeolocationPosition | null;
+  hasLocationPermission: boolean;
+  locationLoading: boolean;
+  locationError: string | null;
+
+  // Settings state
+  settings: AppSettings;
+
+  // UI state
+  ui: UIState;
+
+  // Connectivity state
+  connectivity: ConnectivityState;
+
+  // Global actions
+  hydrate: () => Promise<void>;
+  clearAll: () => Promise<void>;
+  sync: () => Promise<void>;
+}
