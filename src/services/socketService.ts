@@ -27,6 +27,11 @@ class SocketService {
     return new Promise((resolve, reject) => {
       this.userId = userId;
       
+      // Temporalmente deshabilitado hasta que tengamos un servidor Socket.io
+      console.log('⚠️ Socket.io deshabilitado temporalmente');
+      resolve(false);
+      return;
+      
       this.socket = io(this.serverUrl, {
         auth: {
           userId: userId,

@@ -19,7 +19,21 @@
       "Bash(eas credentials:*)",
       "Bash(xargs sed:*)",
       "Bash(find:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(cat:*)",
+      "Bash(CONVEX_DEPLOY_KEY=\"prod:terrific-starling-996|eyJ2MiI6IjhmNGIwNjcwYTMyYTQ3MTM4ZjFhZTJlOTlkZWRmNGE0In0=\" npx convex deploy)",
+      "Bash(CONVEX_DEPLOY_KEY=\"prod:terrific-starling-996|eyJ2MiI6IjhmNGIwNjcwYTMyYTQ3MTM4ZjFhZTJlOTlkZWRmNGE0In0=\" npx convex data)",
+      "Bash(CONVEX_DEPLOY_KEY=\"prod:terrific-starling-996|eyJ2MiI6IjhmNGIwNjcwYTMyYTQ3MTM4ZjFhZTJlOTlkZWRmNGE0In0=\" npx convex run users:createUser '{\"\"name\"\": \"\"Usuario Demo\"\", \"\"email\"\": \"\"demo@handyman.com\"\", \"\"role\"\": \"\"client\"\", \"\"phone\"\": \"\"+573001234567\"\"}')",
+      "Bash(CONVEX_DEPLOY_KEY=\"prod:terrific-starling-996|eyJ2MiI6IjhmNGIwNjcwYTMyYTQ3MTM4ZjFhZTJlOTlkZWRmNGE0In0=\" npx convex run jobs:createJob '{\"\"title\"\": \"\"Reparación de plomería\"\", \"\"description\"\": \"\"Necesito arreglar una fuga en el baño principal\"\", \"\"category\"\": \"\"plomeria\"\", \"\"budget\"\": {\"\"min\"\": 50000, \"\"max\"\": 150000, \"\"currency\"\": \"\"COP\"\"}, \"\"clientId\"\": \"\"jd7fpt9x33nemsxwgcff3d5zy97qekmc\"\", \"\"location\"\": {\"\"lat\"\": 4.710989, \"\"lng\"\": -74.072092, \"\"address\"\": \"\"Bogotá, Colombia\"\"}, \"\"isUrgent\"\": true}')",
+      "Bash(CONVEX_DEPLOY_KEY=\"prod:terrific-starling-996|eyJ2MiI6IjhmNGIwNjcwYTMyYTQ3MTM4ZjFhZTJlOTlkZWRmNGE0In0=\" npx convex data users)",
+      "Bash(CONVEX_DEPLOY_KEY=\"prod:terrific-starling-996|eyJ2MiI6IjhmNGIwNjcwYTMyYTQ3MTM4ZjFhZTJlOTlkZWRmNGE0In0=\" npx convex data jobs)",
+      "Read(//c/Users/alaindev2/Downloads/Handyman Auction Mobile App2/**)",
+      "WebSearch",
+      "Bash(npm run typecheck:*)",
+      "Bash(npm update)",
+      "Bash(npm run build:*)",
+      "Read(//c/Users/alaindev2/Downloads/**)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

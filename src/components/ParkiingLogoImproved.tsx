@@ -163,7 +163,7 @@ export function ParkiingLogoImproved({
               fontWeight: 500
             }}
           >
-            Handyman
+            Parkiing
           </span>
         </div>
       )}

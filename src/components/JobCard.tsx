@@ -1,50 +1,79 @@
 import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { Job } from '../types';
-import { MapPin, Calendar, DollarSign, Clock, Zap, User } from 'lucide-react-native';
-import { Badge } from './ui/badge';
 import { formatCurrency, formatSchedule } from '../utils/helpers';
-import { useLanguage } from './LanguageProvider';
+import { useLanguage } from '../providers/LanguageProvider';
 
 interface JobCardProps {
   job: Job;
-  onClick: (job: Job) => void;
+  onPress: (job: Job) => void;
+  type?: 'opportunities' | 'flashJobs' | 'offers';
 }
 
-export function JobCard({ job, onClick }: JobCardProps) {
+const { width } = Dimensions.get('window');
+const cardWidth = (width - 60) / 2; // Two cards per row with padding
+
+export function JobCard({ job, onPress, type = 'opportunities' }: JobCardProps) {
   const { t } = useLanguage();
   
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'open':
-        return 'bg-green-100 text-green-800';
+        return { backgroundColor: '#dcfce7', color: '#16a34a' };
       case 'in_progress':
-        return 'bg-blue-100 text-blue-800';
+        return { backgroundColor: '#dbeafe', color: '#2563eb' };
       case 'completed':
-        return 'bg-gray-100 text-gray-800';
+        return { backgroundColor: '#f3f4f6', color: '#374151' };
       case 'closed':
-        return 'bg-red-100 text-red-800';
+        return { backgroundColor: '#fecaca', color: '#dc2626' };
       default:
-        return 'bg-gray-100 text-gray-800';
+        return { backgroundColor: '#f3f4f6', color: '#374151' };
     }
   };
 
   const getStatusText = (status: string) => {
     switch (status) {
       case 'open':
-        return t('jobCard.statusOpen');
+        return 'Abierto';
       case 'in_progress':
-        return t('jobCard.statusInProgress');
+        return 'En progreso';
       case 'completed':
-        return t('jobCard.statusCompleted');
+        return 'Completado';
       case 'closed':
-        return t('jobCard.statusClosed');
+        return 'Cerrado';
       default:
         return status;
     }
   };
 
-  const getBudgetTypeText = (type: string) => {
-    return type === 'fixed' ? t('jobCard.fixed') : t('jobCard.average');
+  const getBackgroundGradient = () => {
+    switch (type) {
+      case 'flashJobs':
+        return ['#ef4444', '#dc2626', '#b91c1c'];
+      case 'offers':
+        return ['#10b981', '#059669', '#047857'];
+      default:
+        return ['#3b82f6', '#2563eb', '#1d4ed8'];
+    }
+  };
+
+  const getTypeColor = () => {
+    switch (type) {
+      case 'flashJobs':
+        return '#ef4444';
+      case 'offers':
+        return '#10b981';
+      default:
+        return '#3b82f6';
+    }
   };
 
   const timeAgo = (date: Date) => {
@@ -52,102 +81,205 @@ export function JobCard({ job, onClick }: JobCardProps) {
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
     
     if (diffInMinutes < 60) {
-      return t('jobCard.timeAgo', { time: `${diffInMinutes}m` });
+      return `${diffInMinutes}m`;
     } else if (diffInMinutes < 1440) {
-      return t('jobCard.timeAgo', { time: `${Math.floor(diffInMinutes / 60)}h` });
+      return `${Math.floor(diffInMinutes / 60)}h`;
     } else {
-      return t('jobCard.timeAgo', { time: `${Math.floor(diffInMinutes / 1440)}d` });
+      return `${Math.floor(diffInMinutes / 1440)}d`;
     }
   };
 
   return (
-    <div 
-      className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md active:shadow-lg transition-all duration-200"
-      onClick={() => onClick(job)}
+    <TouchableOpacity 
+      style={styles.cardContainer}
+      onPress={() => onPress(job)}
+      activeOpacity={0.8}
     >
-      {/* Header */}
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start gap-2 mb-2">
-            <h3 className="font-semibold text-lg leading-tight">{job.title}</h3>
+      <LinearGradient
+        colors={getBackgroundGradient()}
+        style={styles.backgroundGradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+        <View style={styles.overlay}>
+          {/* Header */}
+          <View style={styles.header}>
             {job.isUrgent && (
-              <div className="flex items-center gap-1 bg-red-100 text-red-800 px-2 py-1 rounded-full">
-                <Zap size={12} />
-                <span className="text-xs font-medium">{t('jobCard.urgent')}</span>
-              </div>
+              <View style={styles.urgentBadge}>
+                <Ionicons name="flash" size={12} color="#ffffff" />
+                <Text style={styles.urgentText}>Urgente</Text>
+              </View>
             )}
-          </div>
-          <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-3">
-            {job.description}
-          </p>
-        </div>
-      </div>
+            <View style={[styles.typeBadge, { backgroundColor: getTypeColor() }]}>
+              <Text style={styles.typeText}>
+                {type === 'flashJobs' ? 'Flash' : type === 'offers' ? 'Oferta' : 'Trabajo'}
+              </Text>
+            </View>
+          </View>
 
-      {/* Job Details */}
-      <div className="space-y-2 mb-4">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <MapPin size={14} />
-          <span>{job.location}</span>
-          {job.distance && (
-            <span className="text-blue-600">
-              • {t('jobCard.distance', { 
-                distance: job.distance < 1000 
-                  ? `${job.distance}m` 
-                  : `${(job.distance/1000).toFixed(1)}km` 
-              })}
-            </span>
-          )}
-        </div>
+          {/* Content */}
+          <View style={styles.content}>
+            <Text style={styles.title} numberOfLines={2}>
+              {job.title}
+            </Text>
+            
+            <View style={styles.details}>
+              <View style={styles.detailItem}>
+                <Ionicons name="location-outline" size={14} color="#6b7280" />
+                <Text style={styles.detailText} numberOfLines={1}>
+                  {job.location}
+                </Text>
+              </View>
+              
+              {job.distance && (
+                <View style={styles.detailItem}>
+                  <Ionicons name="navigate-outline" size={14} color="#6b7280" />
+                  <Text style={styles.detailText}>
+                    {job.distance < 1000 
+                      ? `${job.distance}m` 
+                      : `${(job.distance/1000).toFixed(1)}km`}
+                  </Text>
+                </View>
+              )}
+            </View>
 
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Calendar size={14} />
-          <span>{t('jobCard.deadline')} {job.deadline.toLocaleDateString()}</span>
-        </div>
+            {/* Budget */}
+            <View style={styles.budget}>
+              <Text style={styles.budgetAmount}>
+                {formatCurrency(job.budget)}
+              </Text>
+              <Text style={styles.budgetType}>
+                {job.budgetType === 'fixed' ? 'Fijo' : 'Promedio'}
+              </Text>
+            </View>
 
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <Clock size={14} />
-          <span>{formatSchedule(job.schedule)}</span>
-        </div>
-
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <User size={14} />
-          <span>{t('jobCard.postedBy')} {job.postedBy}</span>
-          <span className="text-gray-400">• {timeAgo(job.postedDate)}</span>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="text-xs">
-            {t(`categories.${job.category}`)}
-          </Badge>
-          <Badge className={getStatusColor(job.status)}>
-            {getStatusText(job.status)}
-          </Badge>
-        </div>
-        
-        <div className="text-right">
-          <div className="flex items-center gap-1 mb-1">
-            <DollarSign size={16} />
-            <span className="text-lg font-semibold text-green-600">
-              {formatCurrency(job.budget)}
-            </span>
-          </div>
-          <span className="text-xs text-gray-500">
-            {t('jobCard.budget')} {getBudgetTypeText(job.budgetType)}
-          </span>
-        </div>
-      </div>
-
-      {/* Offers indicator */}
-      {job.bids.length > 0 && (
-        <div className="mt-3 pt-3 border-t border-gray-100">
-          <span className="text-sm text-blue-600 font-medium">
-            {t('jobCard.offersReceived', { count: job.bids.length })}
-          </span>
-        </div>
-      )}
-    </div>
+            {/* Footer */}
+            <View style={styles.footer}>
+              <View style={[styles.statusBadge, getStatusColor(job.status)]}>
+                <Text style={[styles.statusText, { color: getStatusColor(job.status).color }]}>
+                  {getStatusText(job.status)}
+                </Text>
+              </View>
+              <Text style={styles.timeAgo}>
+                {timeAgo(job.postedDate)}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </LinearGradient>
+    </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  cardContainer: {
+    width: cardWidth,
+    height: 220,
+    marginBottom: 16,
+    borderRadius: 16,
+    overflow: 'hidden',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  backgroundGradient: {
+    flex: 1,
+    borderRadius: 16,
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    borderRadius: 16,
+    padding: 12,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 8,
+  },
+  urgentBadge: {
+    backgroundColor: '#ef4444',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+    borderRadius: 10,
+    gap: 3,
+  },
+  urgentText: {
+    color: '#ffffff',
+    fontSize: 10,
+    fontWeight: '600',
+  },
+  typeBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  typeText: {
+    color: '#ffffff',
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#ffffff',
+    marginBottom: 8,
+    lineHeight: 20,
+  },
+  details: {
+    gap: 4,
+    marginBottom: 8,
+  },
+  detailItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  detailText: {
+    fontSize: 12,
+    color: '#ffffff',
+    opacity: 0.9,
+    flex: 1,
+  },
+  budget: {
+    marginBottom: 8,
+  },
+  budgetAmount: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#ffffff',
+  },
+  budgetType: {
+    fontSize: 11,
+    color: '#ffffff',
+    opacity: 0.8,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  statusBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+  },
+  statusText: {
+    fontSize: 10,
+    fontWeight: '600',
+  },
+  timeAgo: {
+    fontSize: 11,
+    color: '#ffffff',
+    opacity: 0.8,
+  },
+});

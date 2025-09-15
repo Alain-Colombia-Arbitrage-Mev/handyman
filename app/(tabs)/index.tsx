@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  ScrollView, 
-  StyleSheet, 
-  TouchableOpacity, 
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  Modal 
+  Modal
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../../src/providers/LanguageProvider';
 import { LinearGradient } from 'expo-linear-gradient';
-// import { GoogleMapReal } from '../../src/components/GoogleMapReal';
-import { useGeolocation } from '../../src/hooks/useGeolocation';
-// import { useCurrency } from '../../src/hooks/useCurrency';
+import { useJobs, useLocation, useUI, useSettings } from '../../src/store';
 
 // Interfaces para los tipos de ofertas según el nuevo sistema
 interface Opportunity {
@@ -59,9 +57,11 @@ interface JobOffer {
 }
 
 export default function HomeScreen() {
-  const { currentLocation, getCurrentLocation, isLoading: locationLoading } = useGeolocation();
-  // const { formatCurrency } = useCurrency();
-  
+  const { jobs, fetchJobs, favorites, addToFavorites, removeFromFavorites } = useJobs();
+  const { currentLocation, getCurrentLocation, locationLoading } = useLocation();
+  const { ui, setFilters, openBottomSheet } = useUI();
+  const { settings } = useSettings();
+
   // Función temporal para formatear moneda
   const formatCurrency = (amount: number, currency: string) => {
     const locale = currency === 'USD' ? 'en-US' : 'es-CO';
@@ -71,142 +71,64 @@ export default function HomeScreen() {
       minimumFractionDigits: 0,
     }).format(amount);
   };
-  
-  // Estados para los diferentes tipos de ofertas
-  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
-  const [flashJobs, setFlashJobs] = useState<FlashJob[]>([]);
-  const [jobOffers, setJobOffers] = useState<JobOffer[]>([]);
-  
+
   // Estados del filtro
-  const [activeFilter, setActiveFilter] = useState<'all' | 'opportunities' | 'flash' | 'jobs'>('all');
-  const [filterRadius] = useState(10); // km
+  const [activeFilter, setActiveFilter] = useState<'all' | 'urgent' | 'recent'>('all');
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [detailsModalVisible, setDetailsModalVisible] = useState(false);
 
-  // Datos mockeados para demostración
+  // Fetch jobs when component mounts or location changes
   useEffect(() => {
-    const mockData = async () => {
-      if (!currentLocation) return;
-
-      // Oportunidades mock
-      const mockOpportunities: Opportunity[] = [
-        {
-          id: '1',
-          title: 'Pizza familiar 50% OFF',
-          businessName: 'Pizzería Mario',
-          discount: 50,
-          coordinates: { lat: currentLocation.lat + 0.01, lng: currentLocation.lng + 0.01 },
-          availableUntil: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 horas
-          originalPrice: 40000,
-          discountedPrice: 20000,
-          category: 'food',
-          quantity: 10,
-          remainingQuantity: 7
-        },
-        {
-          id: '2',
-          title: 'Ropa de temporada 70% OFF',
-          businessName: 'Boutique Moda',
-          discount: 70,
-          coordinates: { lat: currentLocation.lat - 0.008, lng: currentLocation.lng + 0.012 },
-          availableUntil: new Date(Date.now() + 4 * 60 * 60 * 1000), // 4 horas
-          originalPrice: 80000,
-          discountedPrice: 24000,
-          category: 'retail',
-          quantity: 15,
-          remainingQuantity: 3
-        }
-      ];
-
-      // Flash Jobs mock
-      const mockFlashJobs: FlashJob[] = [
-        {
-          id: '1',
-          title: 'Reparación urgente de tubería',
-          fixedPrice: 150,
-          currency: 'USD',
-          coordinates: { lat: currentLocation.lat + 0.005, lng: currentLocation.lng - 0.01 },
-          urgency: 'urgent',
-          deadline: new Date(Date.now() + 3 * 60 * 60 * 1000), // 3 horas
-          category: 'plomería',
-          description: 'Tubería rota en baño principal, inundación activa'
-        },
-        {
-          id: '2',
-          title: 'Instalación eléctrica inmediata',
-          fixedPrice: 800000,
-          currency: 'COP',
-          coordinates: { lat: currentLocation.lat - 0.012, lng: currentLocation.lng + 0.008 },
-          urgency: 'high',
-          deadline: new Date(Date.now() + 5 * 60 * 60 * 1000), // 5 horas
-          category: 'electricidad',
-          description: 'Sin luz en oficina, necesario para reunión mañana'
-        }
-      ];
-
-      // Job Offers mock
-      const mockJobOffers: JobOffer[] = [
-        {
-          id: '1',
-          title: 'Pintura de apartamento',
-          budget: { min: 300, max: 500, currency: 'USD' },
-          coordinates: { lat: currentLocation.lat + 0.015, lng: currentLocation.lng - 0.005 },
-          jobType: 'bids_allowed',
-          proposalsCount: 5,
-          category: 'pintura',
-          description: 'Pintura completa de apartamento 2 habitaciones',
-          deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 días
-        },
-        {
-          id: '2',
-          title: 'Limpieza profunda post construcción',
-          budget: { min: 200, max: 200, currency: 'USD' },
-          coordinates: { lat: currentLocation.lat - 0.02, lng: currentLocation.lng - 0.015 },
-          jobType: 'fixed_price',
-          category: 'limpieza',
-          description: 'Limpieza completa después de remodelación'
-        }
-      ];
-
-      setOpportunities(mockOpportunities);
-      setFlashJobs(mockFlashJobs);
-      setJobOffers(mockJobOffers);
+    const loadJobs = async () => {
+      try {
+        await fetchJobs(ui.activeFilters);
+      } catch (error) {
+        console.error('Failed to load jobs:', error);
+      }
     };
 
-    mockData();
-  }, [currentLocation]);
+    loadJobs();
+  }, [fetchJobs, ui.activeFilters]);
 
-  // Filtrar elementos según el filtro activo
-  const getFilteredData = () => {
+  // Get current location on mount
+  useEffect(() => {
+    getCurrentLocation();
+  }, [getCurrentLocation]);
+
+  // Filtrar trabajos según el filtro activo
+  const getFilteredJobs = () => {
     switch (activeFilter) {
-      case 'opportunities':
-        return { opportunities, flashJobs: [], jobOffers: [] };
-      case 'flash':
-        return { opportunities: [], flashJobs, jobOffers: [] };
-      case 'jobs':
-        return { opportunities: [], flashJobs: [], jobOffers };
+      case 'urgent':
+        return jobs.filter(job => job.isUrgent);
+      case 'recent':
+        const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+        return jobs.filter(job => job.createdAt > oneDayAgo);
       default:
-        return { opportunities, flashJobs, jobOffers };
+        return jobs;
     }
   };
 
-  const filteredData = getFilteredData();
-  const totalCount = opportunities.length + flashJobs.length + jobOffers.length;
+  const filteredJobs = getFilteredJobs();
+  const totalCount = jobs.length;
+  const urgentCount = jobs.filter(job => job.isUrgent).length;
 
-  // Handlers para clicks en el mapa
-  const handleOpportunityClick = (opportunity: Opportunity) => {
-    setSelectedItem({ type: 'opportunity', data: opportunity });
+  // Handler para clicks en trabajos
+  const handleJobClick = (job: any) => {
+    setSelectedItem({ type: 'job', data: job });
     setDetailsModalVisible(true);
   };
 
-  const handleFlashJobClick = (flashJob: FlashJob) => {
-    setSelectedItem({ type: 'flash', data: flashJob });
-    setDetailsModalVisible(true);
-  };
-
-  const handleJobOfferClick = (jobOffer: JobOffer) => {
-    setSelectedItem({ type: 'job', data: jobOffer });
-    setDetailsModalVisible(true);
+  // Handler para favoritos
+  const handleFavoriteToggle = async (jobId: string) => {
+    try {
+      if (favorites.includes(jobId)) {
+        await removeFromFavorites(jobId);
+      } else {
+        await addToFavorites(jobId);
+      }
+    } catch (error) {
+      console.error('Failed to toggle favorite:', error);
+    }
   };
 
   return (
@@ -241,31 +163,22 @@ export default function HomeScreen() {
             Todos ({totalCount})
           </Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity
-          style={[styles.filterPill, activeFilter === 'opportunities' && styles.filterPillActive]}
-          onPress={() => setActiveFilter('opportunities')}
+          style={[styles.filterPill, activeFilter === 'urgent' && styles.filterPillActive]}
+          onPress={() => setActiveFilter('urgent')}
         >
-          <Text style={[styles.filterText, activeFilter === 'opportunities' && styles.filterTextActive]}>
-            🎯 Oportunidades ({opportunities.length})
+          <Text style={[styles.filterText, activeFilter === 'urgent' && styles.filterTextActive]}>
+            ⚡ Urgentes ({urgentCount})
           </Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity
-          style={[styles.filterPill, activeFilter === 'flash' && styles.filterPillActive]}
-          onPress={() => setActiveFilter('flash')}
+          style={[styles.filterPill, activeFilter === 'recent' && styles.filterPillActive]}
+          onPress={() => setActiveFilter('recent')}
         >
-          <Text style={[styles.filterText, activeFilter === 'flash' && styles.filterTextActive]}>
-            ⚡ Flash Jobs ({flashJobs.length})
-          </Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-          style={[styles.filterPill, activeFilter === 'jobs' && styles.filterPillActive]}
-          onPress={() => setActiveFilter('jobs')}
-        >
-          <Text style={[styles.filterText, activeFilter === 'jobs' && styles.filterTextActive]}>
-            💼 Ofertas ({jobOffers.length})
+          <Text style={[styles.filterText, activeFilter === 'recent' && styles.filterTextActive]}>
+            🕒 Recientes
           </Text>
         </TouchableOpacity>
       </ScrollView>
@@ -286,45 +199,27 @@ export default function HomeScreen() {
               <View style={styles.userLocationPulse} />
             </View>
             
-            {/* Sample markers for opportunities */}
-            {filteredData.opportunities.map((opp, index) => (
-              <TouchableOpacity
-                key={opp.id}
-                style={[
-                  styles.opportunityMarker,
-                  { top: `${30 + index * 15}%`, left: `${25 + index * 20}%` }
-                ]}
-                onPress={() => handleOpportunityClick(opp)}
-              >
-                <Text style={styles.markerText}>🎯</Text>
-              </TouchableOpacity>
-            ))}
-            
-            {/* Sample markers for flash jobs */}
-            {filteredData.flashJobs.map((job, index) => (
+            {/* Job markers */}
+            {filteredJobs.slice(0, 6).map((job, index) => (
               <TouchableOpacity
                 key={job.id}
                 style={[
-                  styles.flashJobMarker,
-                  { top: `${45 + index * 20}%`, right: `${20 + index * 15}%` }
+                  job.isUrgent ? styles.urgentJobMarker : styles.regularJobMarker,
+                  {
+                    top: `${20 + (index % 3) * 25}%`,
+                    left: `${15 + Math.floor(index / 3) * 35}%`
+                  }
                 ]}
-                onPress={() => handleFlashJobClick(job)}
+                onPress={() => handleJobClick(job)}
               >
-                <Text style={styles.markerText}>⚡</Text>
-              </TouchableOpacity>
-            ))}
-            
-            {/* Sample markers for job offers */}
-            {filteredData.jobOffers.map((offer, index) => (
-              <TouchableOpacity
-                key={offer.id}
-                style={[
-                  styles.jobOfferMarker,
-                  { bottom: `${25 + index * 18}%`, left: `${30 + index * 25}%` }
-                ]}
-                onPress={() => handleJobOfferClick(offer)}
-              >
-                <Text style={styles.markerText}>💼</Text>
+                <Text style={styles.markerText}>
+                  {job.isUrgent ? '⚡' : '💼'}
+                </Text>
+                {favorites.includes(job.id) && (
+                  <View style={styles.favoriteIndicator}>
+                    <Ionicons name="heart" size={12} color="#ef4444" />
+                  </View>
+                )}
               </TouchableOpacity>
             ))}
             
@@ -350,21 +245,21 @@ export default function HomeScreen() {
       {/* Quick Stats */}
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
-          <Ionicons name="time-outline" size={16} color="#F59E0B" />
+          <Ionicons name="briefcase-outline" size={16} color="#3B82F6" />
           <Text style={styles.statText}>
-            {opportunities.filter(o => o.availableUntil.getTime() - Date.now() < 2 * 60 * 60 * 1000).length} expiran pronto
+            {totalCount} trabajos
           </Text>
         </View>
         <View style={styles.statItem}>
           <Ionicons name="flash-outline" size={16} color="#EF4444" />
           <Text style={styles.statText}>
-            {flashJobs.filter(j => j.urgency === 'urgent').length} urgentes
+            {urgentCount} urgentes
           </Text>
         </View>
         <View style={styles.statItem}>
-          <Ionicons name="people-outline" size={16} color="#10B981" />
+          <Ionicons name="heart-outline" size={16} color="#10B981" />
           <Text style={styles.statText}>
-            {jobOffers.reduce((sum, j) => sum + (j.proposalsCount || 0), 0)} propuestas
+            {favorites.length} favoritos
           </Text>
         </View>
       </View>
@@ -390,40 +285,42 @@ export default function HomeScreen() {
           {selectedItem && (
             <ScrollView style={styles.modalContent}>
               <View style={styles.modalCard}>
-                <Text style={styles.itemTitle}>{selectedItem.data.title}</Text>
-                {selectedItem.type === 'opportunity' && (
-                  <>
-                    <Text style={styles.businessName}>{selectedItem.data.businessName}</Text>
-                    <Text style={styles.priceText}>
-                      <Text style={styles.originalPrice}>{formatCurrency(selectedItem.data.originalPrice, 'COP')}</Text>
-                      {' '}
-                      <Text style={styles.discountedPrice}>{formatCurrency(selectedItem.data.discountedPrice, 'COP')}</Text>
-                    </Text>
-                    <View style={styles.discountBadge}>
-                      <Text style={styles.discountText}>{selectedItem.data.discount}% OFF</Text>
-                    </View>
-                  </>
+                <View style={styles.modalHeader}>
+                  <Text style={styles.itemTitle}>{selectedItem.data.title}</Text>
+                  <TouchableOpacity
+                    onPress={() => handleFavoriteToggle(selectedItem.data.id)}
+                    style={styles.favoriteButton}
+                  >
+                    <Ionicons
+                      name={favorites.includes(selectedItem.data.id) ? "heart" : "heart-outline"}
+                      size={24}
+                      color={favorites.includes(selectedItem.data.id) ? "#ef4444" : "#6b7280"}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                <Text style={styles.categoryText}>{selectedItem.data.category}</Text>
+
+                <Text style={styles.priceText}>
+                  {formatCurrency(selectedItem.data.budget.min, selectedItem.data.budget.currency)}
+                  {selectedItem.data.budget.min !== selectedItem.data.budget.max &&
+                    ` - ${formatCurrency(selectedItem.data.budget.max, selectedItem.data.budget.currency)}`
+                  } {selectedItem.data.budget.currency}
+                </Text>
+
+                <Text style={styles.descriptionText}>{selectedItem.data.description}</Text>
+
+                {selectedItem.data.isUrgent && (
+                  <View style={styles.urgentBadge}>
+                    <Ionicons name="flash" size={14} color="#ef4444" />
+                    <Text style={styles.urgentText}>Urgente</Text>
+                  </View>
                 )}
-                {selectedItem.type === 'flash' && (
-                  <>
-                    <Text style={styles.categoryText}>{selectedItem.data.category}</Text>
-                    <Text style={styles.priceText}>
-                      {formatCurrency(selectedItem.data.fixedPrice, selectedItem.data.currency)} {selectedItem.data.currency}
-                    </Text>
-                    <Text style={styles.descriptionText}>{selectedItem.data.description}</Text>
-                  </>
-                )}
-                {selectedItem.type === 'job' && (
-                  <>
-                    <Text style={styles.categoryText}>{selectedItem.data.category}</Text>
-                    <Text style={styles.priceText}>
-                      {selectedItem.data.jobType === 'fixed_price' 
-                        ? `Precio fijo: ${formatCurrency(selectedItem.data.budget.min, selectedItem.data.budget.currency)}`
-                        : `${formatCurrency(selectedItem.data.budget.min, selectedItem.data.budget.currency)} - ${formatCurrency(selectedItem.data.budget.max, selectedItem.data.budget.currency)}`
-                      } {selectedItem.data.budget.currency}
-                    </Text>
-                    <Text style={styles.descriptionText}>{selectedItem.data.description}</Text>
-                  </>
+
+                {selectedItem.data.distance && (
+                  <Text style={styles.distanceText}>
+                    📍 {selectedItem.data.distance} km de distancia
+                  </Text>
                 )}
               </View>
             </ScrollView>
@@ -529,21 +426,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3B82F6',
     opacity: 0.3,
   },
-  opportunityMarker: {
-    position: 'absolute',
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: '#F59E0B',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  flashJobMarker: {
+  urgentJobMarker: {
     position: 'absolute',
     width: 32,
     height: 32,
@@ -557,7 +440,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
-  jobOfferMarker: {
+  regularJobMarker: {
     position: 'absolute',
     width: 32,
     height: 32,
@@ -570,6 +453,48 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+  },
+  favoriteIndicator: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 2,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 8,
+  },
+  favoriteButton: {
+    padding: 4,
+  },
+  urgentBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fef2f2',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    alignSelf: 'flex-start',
+    marginTop: 8,
+  },
+  urgentText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#ef4444',
+    marginLeft: 4,
+  },
+  distanceText: {
+    fontSize: 12,
+    color: '#6b7280',
+    marginTop: 8,
   },
   markerText: {
     fontSize: 16,

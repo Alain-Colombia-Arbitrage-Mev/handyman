@@ -197,7 +197,7 @@ export function UniversalLogo({
               lineHeight: 1
             }}
           >
-            Handyman Services
+            Parkiing Services
           </span>
         </div>
       )}

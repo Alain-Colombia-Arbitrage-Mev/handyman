@@ -89,7 +89,7 @@ export function OptimizedLogo({
             className="text-gray-500 leading-none mt-1"
             style={{ fontSize: size * 0.2 }}
           >
-            Handyman
+            Parkiing
           </span>
         </div>
       )}

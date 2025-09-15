@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Handyman Auction",
+    "name": "Parkiing",
     "slug": "parkiing",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,7 +16,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.handymanauction.app",
+      "bundleIdentifier": "com.parkiing.app",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -26,7 +26,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.handymanauction.app"
+      "package": "com.parkiing.app"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -36,7 +36,7 @@
       "expo-router",
       "expo-font"
     ],
-    "scheme": "handyman-auction",
+    "scheme": "parkiing",
     "extra": {
       "router": {
         "origin": false

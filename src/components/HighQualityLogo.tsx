@@ -147,7 +147,7 @@ export function HighQualityLogo({
                 fill={colors.secondary}
                 className="select-none opacity-80"
               >
-                Handyman Services
+                Parkiing Services
               </text>
             </g>
           )}

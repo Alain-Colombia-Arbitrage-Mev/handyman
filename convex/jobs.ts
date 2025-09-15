@@ -42,16 +42,21 @@ export const getJobs = query({
     limit: v.optional(v.number()),
   },
   handler: async (ctx: QueryCtx, args) => {
-    let query = ctx.db.query("jobs");
-    
+    let jobs;
+
     if (args.status) {
-      query = query.withIndex("by_status", (q) => q.eq("status", args.status as any));
+      jobs = await ctx.db
+        .query("jobs")
+        .withIndex("by_status", (q) => q.eq("status", args.status as any))
+        .order("desc")
+        .take(args.limit || 50);
+    } else {
+      jobs = await ctx.db
+        .query("jobs")
+        .order("desc")
+        .take(args.limit || 50);
     }
-    
-    const jobs = await query
-      .order("desc")
-      .take(args.limit || 50);
-    
+
     return jobs;
   },
 });
