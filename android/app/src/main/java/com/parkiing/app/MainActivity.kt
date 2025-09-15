@@ -1,4 +1,4 @@
-package com.handymanauction.app
+package com.parkiing.app
 
 import android.os.Build
 import android.os.Bundle

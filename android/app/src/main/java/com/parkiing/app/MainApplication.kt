@@ -1,4 +1,4 @@
-package com.handymanauction.app
+package com.parkiing.app
 
 import android.app.Application
 import android.content.res.Configuration

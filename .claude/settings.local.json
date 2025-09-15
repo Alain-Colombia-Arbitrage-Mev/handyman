@@ -33,7 +33,8 @@
       "Bash(npm update)",
       "Bash(npm run build:*)",
       "Read(//c/Users/alaindev2/Downloads/**)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(eas:*)"
     ],
     "deny": [],
     "ask": []
